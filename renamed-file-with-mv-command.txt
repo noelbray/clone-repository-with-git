@@ -1,0 +1,13 @@
+To rename a file, use the mv command: 
+
+git mv <file_from> <file_to>
+
+Example: 
+
+git mv rename-file-with-mv-command.txt renamed-filewith-mv-command.txt
+
+There is a longer method: 
+
+mv Readme.md README
+git rm Readme.md
+git add README

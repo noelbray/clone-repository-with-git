@@ -1,3 +1,5 @@
 forceably remove a file that is has been staged:
 
 use git rm -f <filename>
+
+and it will be permanently be removed from git and the project file.
