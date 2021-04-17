@@ -1,0 +1,3 @@
+Without arguments, git log will list the commits from most recent to less recent. 
+
+git log
