@@ -2,4 +2,17 @@ You can do this, yes you can. Keep going.
 
 Unmodify this file. I don't want to keep my changes to this file. 
 
-revert it back to here. 
+revert it back to here.
+
+I already reverted this file back to line 5, 
+but I write this new message here to reinforce how I did it:
+
+to disrecard changes to the "working directory":
+
+git restore <filename> 
+
+will restore an unstaged file to its previous state.
+
+You can also use:
+
+git checkout -- <filename>
