@@ -6,3 +6,8 @@ git restore --staged <filename>
 
 to unstage the file, etc. that I didn't want on the stage.
 
+You can also used
+
+git reset HEAD <filename> 
+
+to do this too. 
