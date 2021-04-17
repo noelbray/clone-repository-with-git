@@ -1,0 +1,5 @@
+making some changes
+
+Oops, I forgot something. I just modified this file again.
+
+edited file again after staging previous edit with git add fileName.txt

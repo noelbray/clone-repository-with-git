@@ -1,0 +1,7 @@
+Any file that has unstaged changes will remain as modified even after a commit is performed.
+
+If you want the changes to be applied, you have to stage them first by running "git add <filename>"
+
+Any file, any change, any modification will stay as modified or as is if it is not "staged," on the stage waiting to be committed with "git commit ".
+
+This file has been modified by adding this line of text and then saving it; and it will be marked with M in the second column of the short syntax of "git status -s". 
