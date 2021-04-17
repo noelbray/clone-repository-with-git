@@ -1,0 +1,8 @@
+I can do this. WGICWGIWOH.
+
+I used 
+
+git restore --staged <filename>
+
+to unstage the file, etc. that I didn't want on the stage.
+
