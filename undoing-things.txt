@@ -1,2 +1,12 @@
 href="https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things"
 
+git commit --amend 
+
+overwrites the last commit so that it basically never existed
+
+Only amend local commits
+
+Do not amend commits that have been pushed somewhere. 
+
+For more info: The Perils of Rebasing: https://git-scm.com/book/en/v2/ch00/_rebase_peril
+
