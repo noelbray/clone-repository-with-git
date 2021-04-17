@@ -1,3 +1,103 @@
 Without arguments, git log will list the commits from most recent to less recent. 
 
-git log
+git log -p or git log --patch to show the difference in the patch output
+
+-<number> such as -2 option will show only the two most recent commits
+
+Example: git log -p -3
+
+git log --stat 
+
+will show the deletions and insertions
+
+git log --pretty=specifier
+
+example: 
+
+git log --prety=oneline
+
+show commits on one line, sha1 and description
+
+git log --pretty=format:"%h - %an, %ar : %s"
+
+yields
+
+sha1 - author - time - commit message
+
+checkout specifiers for git log --pretty=format: https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
+
+%H Commit hash
+%h Abbreviated commit hash
+%T Tree hash
+%t Appreviated tree hash
+%P Parent hashes
+%p Abbreviated parent hashes
+%an Author name
+%ae Author email
+%ad Author date (format respects the --date=option)
+%ar Author date, relative
+%cn Committer name
+%ce Committer email
+%cd Committer date
+%cr Committer date, relative
+%s Subject
+
+git log --pretty=format:"%h %s" --graph
+
+ASCII graph showing your branch and merge history.
+
+See common options to git log: 
+
+https://git-scm.com/book/en/v2/ch00/log_options
+
+-p show the patch introduced with each commit
+
+--stat show statistics for files modified in each commit
+
+--shortstat display only the changed/insertions/deletions line from teh --stat comand
+
+--name-only show the list of files modfied after the commit information
+
+--name-status show the list of files affected with added/modified/deleted information as well
+
+--abbrev-commit show only the first few characters of the sha-1 checksum instead of all 40
+
+--relative-data display the date in a relative form instead of using the full date format
+
+
+etc. 
+
+git log also has limiting log output options
+
+examples: 
+
+git log --since=2.weeks
+
+git log --since="1 day"
+
+git log --since="2008-01-15"
+
+search commit messages with keyword: 
+
+git log --grep="keyword"
+
+example: git log --grep="Delete"
+
+Pickaxe, Helpful Filter:
+
+git log -S function_name
+
+Find commits that introduced a change to a specific path, file, folder, etc. 
+
+git log -- path/to/file
+
+Options to limit the output: https://git-scm.com/book/en/v2/ch00/limit_options
+
+To prevent merge commits from showing: 
+
+git log --no-merges
+
+
+
+
+
