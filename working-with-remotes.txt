@@ -1,0 +1,89 @@
+List shortnames of each remote handle you specified: 
+
+git remote
+
+Change Directory: cd <directoryname>
+
+Get cloned repository's remote: 
+
+git remote
+
+will yield : 
+
+origin
+
+List Shortnames like origin or whatever name that is already set:
+
+git remote -v
+
+and will show you all the remotes if you are working with more than one remote.
+
+example: 
+
+shortname url (fetch)
+shortname url (push)
+shortname2 url (fetch)
+shortname2 url (push)
+
+
+Cloning a repository implicitly adds the "origin" remote
+
+Explicitly Add new remote with Shortname for a Git repository for easy referencing:
+
+git remote <shortname> <url>:
+
+git remote gw https://github.com/georgewashington/founder
+
+gw is the shortcut for the remote address, url next to it
+
+gw can be used on the command line, terminal
+
+example: 
+
+git fetch gw
+
+Get Data From Remote:
+
+git fetch <remote>
+
+Cloned Respository's Shortname is origin
+
+To fetch any new work from the origin: 
+
+git fetch origin
+
+(fetch only downloads the data to your lcoal repository, it doesn't automatically merge it with any of your work or modify what you are working on; you merge it when you are ready)
+
+
+After setting up branch tracking, you can use 
+
+git pull 
+
+to automatically fetch and then merge that remote branch into your current branch.
+
+The master, main, or whatever the cloned branch is called is automatically set up to track the remote master, main, or whatever it's called branch.
+
+Side note: 
+
+See Git Configurations: git config --list or git config <property.name> 
+
+example: 
+
+git config user.name 
+
+or 
+
+git config pull.rebase
+
+Pushing To Your Remotes: 
+
+git push <remote-address> <branch>
+
+or 
+
+git push <remote-shortname> <branch>
+
+in my case, for this practice repository called "clone-repository-with-git":
+
+git push origin main
+
