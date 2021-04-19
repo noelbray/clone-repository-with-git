@@ -10,3 +10,6 @@ Do not amend commits that have been pushed somewhere.
 
 For more info: The Perils of Rebasing: https://git-scm.com/book/en/v2/ch00/_rebase_peril
 
+Important:
+
+Only use restore whey you "absolutely" know that you don't want the unsaved local changes.
