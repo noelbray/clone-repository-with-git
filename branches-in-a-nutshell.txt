@@ -69,6 +69,11 @@ To Switch To A Branch:
 
 git checkout <name-of-branch>
 
+
+Show Commit History For A Branch
+
+git log <branch-name>
+
 --
 
 Find Out What Branch You're On:
@@ -79,6 +84,10 @@ the name with the asterisk( * ) is the branch you're currently on:
 
 * main
 testingBranch1
+
+
+
+
 
 
 
