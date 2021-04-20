@@ -1,3 +1,5 @@
+https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
+
 "Branching means you diverge from teh main line of development and continue to do work without messing with that main line."
 
 "Git encourages workflows that branch and merge often, even multiple times in a day."
@@ -14,8 +16,69 @@ After commit, git stores pointer to snapshot in an object, pointers to the commi
 
 - multiple parents for a commit that results from a merge of two or more branches
 
+
+
 Example:
 
 Stage 3 files: 
 
 git add README test.rb License
+
+git commit -m "commit message"
+
+Now a sha-1 hash has been created for those 3 files "which stores that version of the file in teh git repository (as blobs) and adds a checksum to the staging area. 
+
+commit object > tree object > blob object(s)
+
+- commit has pointer to root tree object and metadata about commit
+
+- tree object, poin lists the contents of the directory and specifies which file names are store as which blogs.
+
+Every Commit Stores A Pointer To Immediate Previous Commit
+
+A Branch Is: 
+
+- lightweight movable pointer to any one commit
+
+Main, Master Branches Pointer Moves Forward After Each Commit. 
+
+Master, Main Branch Points To The Last Commit You Made which has a snapshot of everything at that point. 
+
+Aside, You can name the Master branch any name you want.
+
+Creating A New Branch: 
+
+git branch <branch-name>
+
+- Creates a New Moveable Pointer to the commit you're currently on.
+
+- But doesn't switch to the new branch, you remain on the branch you are currently on.
+
+Git Knows The Branch Your On by 'special pointer called HEAD'
+
+See Where The 'HEAD' is pointing: 
+
+git log --decorate
+
+or to make one line contianing commit sha-1 and commit message:
+
+git log --oneline --decorate
+
+
+To Switch To A Branch:
+
+git checkout <name-of-branch>
+
+--
+
+Find Out What Branch You're On:
+
+git branch
+
+the name with the asterisk( * ) is the branch you're currently on: 
+
+* main
+testingBranch1
+
+
+
