@@ -1,0 +1,68 @@
+Set Up An Aliase For Each Command
+
+Use "git config":
+
+git config --global alias.<alias-name> <command>
+
+Examples:
+
+git config --global alias.co checkout
+
+git config --global alias.br branch
+
+git config --global alias.ci commit
+
+git config --global alias.st status
+
+After configuring an alias, 
+you can use that alias in place of the command:
+
+git ci
+git br
+git st
+
+git whateverAlias
+
+It's okay to use alias for commands you use a lot.
+
+Create Your Own Commands:
+
+git config --global alias.<made-up-name> <command>
+
+Example: 
+
+Make an alias for: 
+
+git reset HEAD -- <filename>
+
+like so:
+
+git config --global alias.unstage 'reset HEAD --'
+
+now you can use 
+
+git unstage <filename>
+
+instead of 
+
+git reset HEAD -- <filename>
+
+Add A Last Command:
+
+git config --global alias.last 'log -1 HEAD'
+
+which enables you 
+
+To See The Last Commit easily by running 
+
+git last
+
+Alias For External Command or To Write Your Own Tools For Working With Git Repository:
+
+Example External Alias:
+
+git config --global alias.visual '!gitk'
+
+now you can do that command by running: 
+
+git visual

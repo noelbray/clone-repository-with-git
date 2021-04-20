@@ -1,0 +1,169 @@
+https://git-scm.com/book/en/v2/Git-Basics-Tagging
+
+Tag specific, important points in history
+
+The Current, Most Recent, Commit Will Be Tagged
+
+Mark Release Points, Mark Releases
+
+- used to mark release points: v1.0, v2.0, and so on
+
+Listing Your Tags (alphabetical order)
+
+git tag (with optional -l or --list)
+
+Match tags for a Pattern:
+
+example:
+
+If you are interested in the versions, series "1.8.5":
+
+git tag -l <wildcard>
+
+git tag -l "v1.8.5"
+
+or 
+
+git tag --list "v1.8.5"
+
+Lightweight Tags:
+
+- is very much like a branch that doesn't change
+
+- it's just a pointer to a specific commit
+
+Annotated Tags:
+
+(Generally Recommeded To Take so that you can have all this information:)
+
+- stored as full objects in the Git Database.
+
+- checksummed
+
+- contain tagger name, email, and date
+
+- have a tagging message
+
+- can be signed and verified with GNU Privacy Guard (GPG)
+
+Create Annotated Tag
+
+use -a or --annotate option and -m option for creating a message
+
+git tag -a <tag-name> -m <tag-message>
+
+Now The Current - Most Recent - Commit Has Been Tagged, Annotated
+
+See Tag Message: 
+
+git show <tag-name>
+
+- it will show the tagger information, date commit was tagged, and the annotation message before showing the commit information
+
+Lightweight Tag: 
+
+- Commit Checksum Stored In A File
+
+- no other information is kept
+
+You don't have to supply -a, -s, or -m options
+
+just do this: 
+
+git tag <tag-name>
+
+example: 
+
+git tag v0.1
+
+or 
+
+git tag v0.1-lw 
+
+lw (means lightweight, add lw to clarify it is a lightweight tag if you want to)
+
+- if you run "git show <lightweight-tag-name>" you will only see the "commit and the commit's information"
+
+Tag Previous Commit: 
+
+git part or all of the commit checksum, sha-1:
+
+If you don't know it off-hand, you can use git log <options> to find it:
+
+git log <options>
+
+I used 
+
+git log --before="2021-04-17"
+
+which pulled up all the commits before April 17th, 2021
+
+and I copied
+
+commit a165d3efd9e9fd212ebea90e5d198d1006d431d6 with messge "Add file undoing-things.txt" 
+
+Annoted Tag For This Previous Commit 
+
+git tag -a <tag-name> <part-or-all-of-checksum-sha-1>
+
+Lightweight Tag For This Previous Commit
+
+git tag <tag-name> <part-or-all-of-checksum-sha-1>
+
+git tag v0.0-lw (resume when ready and do this, then git show <tag-name>)
+
+A commit can have an Annotated and Lightweight tag or either of them by itself. 
+
+TYGAMGFE.
+
+Tags Are Not Transfered To Remote Servers During The "git push command"
+
+You have to Explicitly push tags to a shared server after you have created them. 
+
+Push 1 Tag At A Time:
+
+git push <shortname> <tagname>
+
+git push origin v0.0
+
+Push All Tags At Once: 
+
+git push <shortname> --tags
+
+git push origin --tags
+
+To Push Only Annotated Tags: 
+
+git push <remote - shortname> --follow-tags
+
+git push origin --follow-tags
+
+Delete Tag (Local)
+
+git tag -d <tagname>
+
+Delete Tag From Remote Server
+
+git push origin :refs/tags/<tagname>
+
+- since there is nothing before the :refs/tags/tagname,
+it is interpreted as "null" which deletes the tag name. 
+
+2nd, Best, Way To Delete Tag From Remote: 
+
+git push origin --delete <tagname> 
+
+Checking Out Tags: 
+
+- 'In Detached Head State', view versions of files a tag is pointing to. 
+
+- if you make changes and create a commit, the tag will stay the same, but your new commit won't belong to any branch and will be only reachable by its 'commit hash'
+
+Alternatively, you could create a branch instead: 
+
+git checkout -b <branchName> <tag name>
+
+git checkout -b version2 v2.0.0
+
+But, remember, this branch, version will be slightly differen than from the tag and move forward on it's own. 'so do be careful'
+
