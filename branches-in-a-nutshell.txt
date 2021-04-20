@@ -1,0 +1,21 @@
+"Branching means you diverge from teh main line of development and continue to do work without messing with that main line."
+
+"Git encourages workflows that branch and merge often, even multiple times in a day."
+
+Git Stores Data: 
+
+- in a series of snapshots
+
+After commit, git stores pointer to snapshot in an object, pointers to the commit(s) that were before this comit (its parent or parents):
+
+- zero parents for initial commit
+
+- one parent for a normal commit
+
+- multiple parents for a commit that results from a merge of two or more branches
+
+Example:
+
+Stage 3 files: 
+
+git add README test.rb License
