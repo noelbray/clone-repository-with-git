@@ -74,6 +74,39 @@ Show Commit History For A Branch
 
 git log <branch-name>
 
+By Default, 'git log' will only show the commit history below the branch you've 'checked out,' are in.
+
+Show All Branches' History:
+
+git log --all
+
+
+git checkout <branch-name> Does Two Things: 
+
+- move HEAD Pointer To The Specified Branch (main branch in my case)
+
+- revert the files in my working directory back to the 'snapshot that main, master points to' 
+
+- changes you make from this point onward will diverge from an older version of the project. 
+
+
+
+Switching Branches Changes Files In Your Working Directory:
+
+- If you switch to an older branch, your working directory will be reverted to look like it did the last time you commited on that branch. (That's what I did.)
+
+Divergent History: 
+
+- create a branch make some changes
+
+- go back to main, master branch make some changes.
+
+- changes on different branches are isolated from each other
+
+- you can switch back and forth between the branches and do different work on them, and then merge them when you're ready. 
+
+
+
 --
 
 Find Out What Branch You're On:
