@@ -107,6 +107,51 @@ Divergent History:
 
 
 
+See History of Commits, Branch Pointers' Location, History Divergence:
+
+git log --oneline --decorate --graph --all
+
+
+
+A Branch is a 40 character SHA-1 checksum of the commit it points to making them: 
+
+- cheap to create and destroy.
+
+- Since Commit's Parent(s) are recorded, finding a merge base for merging is automatically done and generally easy to do.
+
+
+
+Creating A New Branch And Switching To It at the same time: 
+
+git checkout -b <newbranchname>
+
+-b means to create and checkout a new branch
+
+Use Switch Instead of Checkout from git version 2.23 up: 
+
+
+Switch To Existing Branch: 
+
+git switch <branch-name>
+
+git switch testing-branch
+
+
+Create A New Branch and Switch To It:
+
+git switch -c new-branch
+
+-c flag stands for create
+
+or use --create
+
+
+Return To Previous Checked Out Branch: 
+
+git switch -
+
+
+
 --
 
 Find Out What Branch You're On:
