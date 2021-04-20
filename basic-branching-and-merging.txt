@@ -1,0 +1,29 @@
+Branching And Merging Workflow - Real World Example
+
+1. Do some work on a website.
+
+2. Create a branch for a new user story you're working on. 
+
+3. Do some work in that branch
+
+But, you receive a call that another issue is critical and you need a 'hotfix'; Now do:
+
+1. Switch to your production branch
+
+2. Create a branch to add the hotfix.
+
+3. After it's tested, merge the hotfix branch, and push to production.
+
+4. Switch back to your original user story and continue working.
+
+
+Companies Have Issue-Tracking System: 
+
+iss will be short for issue followed by -<number> to indicate the issue number the branch is dealing with, resolving:
+
+Create A Branch and Simultaneously Switch To It: 
+
+git switch -b <new-branch-name>
+
+git switch -b iss-53
+
