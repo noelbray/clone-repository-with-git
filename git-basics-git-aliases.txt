@@ -66,3 +66,5 @@ git config --global alias.visual '!gitk'
 now you can do that command by running: 
 
 git visual
+
+Made Some Changes to this file while in the testingBranch1 branch.
