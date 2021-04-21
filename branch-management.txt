@@ -44,6 +44,23 @@ Rename Branch Locally:
 
 git branch --move bad-branch-name better-branch-name
 
-Push better-branch-name to Remote (Github or some other remote)
+Push better-branch-name to Remote (Github or some other remote) 
+
+- if you have already pushed the branch to the remote:
+
+git branch --set-upstream origin better-branch-name
+
+which will automatically 
+
+- if you have not pushed the branch yet, just run: 
+
+git branch -u origin better-branch-name
+
+-u is short for --set-upstream
+
+To Delete The Old Branch From The Remote That Now Has The Newly Renamed Old Branch Name: 
+
+git push origin --delete bad-branch-name
+
 
 
