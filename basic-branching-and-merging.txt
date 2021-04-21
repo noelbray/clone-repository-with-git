@@ -27,3 +27,19 @@ git switch -b <new-branch-name>
 
 git switch -b iss-53
 
+"If your working directory or staging area has uncommited changes that conflict with the branch you're checking out, Git won't let you switch branches."
+
+When you switch branches, 
+
+- the Working Directory is set back to the way it was before the new branch or any branch was created or edited. 
+
+- the Working Directory will look like the last commit in it.
+
+hotfix-branch-for-main website was created:
+
+- hotfix issue has been resolved and tested. 
+
+- 'Fixed broken email address' and 'broken footer'
+
+- Commit: 'Hotfix Issue Has Been Fixed and Tested; Ready To Merge'
+
