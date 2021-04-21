@@ -5,3 +5,9 @@ Here some more information about hotfix issue-53:
 Hotfix issue was in basic-branching-and-merging.txt has now been fixed and tested. 
 
 Okay to merge. Yep, Yep. 
+
+Last Commit, All Fixed, Ready To Merge
+
+You were just called and told that there is an issue with the main website that needs to be fixed immediately.
+
+So switch back to main website branch and fix the issue please. 
