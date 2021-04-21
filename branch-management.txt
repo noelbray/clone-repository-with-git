@@ -62,5 +62,29 @@ To Delete The Old Branch From The Remote That Now Has The Newly Renamed Old Bran
 
 git push origin --delete bad-branch-name
 
+Changing The Master Branch Name
+
+- chaning master branch will:
+BREAK THE INTEGRATIONS, SERVICEs, HELPER UTILITIES and BUILD/RELEASE Scripts that your repository uses.
+
+- Before You Change The Master, Main Branch Name, CONSULT COLLABORATORS.
+
+- Thoroughly Search Repo(sitory) and Update Any References To Old Branch In Code And Scripts
+
+To rename master branch: 
+
+git branch --move master main
+
+now push it to remote:
+
+git push --set-upstream origin main
+
+After Changing The Master Branch Name, You have to
+
+do several things listed on this page: 
+
+https://git-scm.com/book/en/v2/Git-Branching-Branch-Management 
+DON'T delete the Master Branch On Github or remote until you know that Main "performs just as the master branch."
+
 
 
