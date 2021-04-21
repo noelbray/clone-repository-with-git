@@ -43,3 +43,19 @@ hotfix-branch-for-main website was created:
 
 - Commit: 'Hotfix Issue Has Been Fixed and Tested; Ready To Merge'
 
+Fast-forward Merge: 
+
+If a commit in a new branch is immediately after a commit on the main branch, Git will just move the HEAD pointer to the commit that is ahead on the new branch. 
+
+If No Divergent Work on a branch, Git Just moves the pointer (HEAD) to the commit of the branch that was merged in. 
+
+Now you can Delete Hotfix Branch the hotfix branch, in my case, hotfix-branch-for-main:
+
+- you can delete the hotfix branch because you no longer need it since it is merged into main, master and the master, main branch points to the same place, commit of the hotfix branch. 
+
+Delete Branch
+
+git branch -d <branchname>
+
+git branch -d hotfix-branch-for-main
+
