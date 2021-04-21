@@ -1,3 +1,5 @@
+https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+
 Branching And Merging Workflow - Real World Example
 
 1. Do some work on a website.
@@ -47,7 +49,7 @@ Fast-forward Merge:
 
 If a commit in a new branch is immediately after a commit on the main branch, Git will just move the HEAD pointer to the commit that is ahead on the new branch. 
 
-If No Divergent Work on a branch, Git Just moves the pointer (HEAD) to the commit of the branch that was merged in. 
+If No Divergent Work on a branch, If the branch is a Direct Ancestor, Git Just moves the pointer (HEAD) to the commit of the branch that was merged in. 
 
 Now you can Delete Hotfix Branch the hotfix branch, in my case, hotfix-branch-for-main:
 
@@ -58,4 +60,116 @@ Delete Branch
 git branch -d <branchname>
 
 git branch -d hotfix-branch-for-main
+
+Note: 
+
+The work done in the hotfix-branch-for-main that was merged into main, is not in the the older branch, so you can do one of two things: 
+
+1. If you need to pull in the main, master branch (that the hotfix was merged into), you merge your master branch into your iss53 branch by:
+
+git switch iss-53
+
+git merge master
+
+or you can
+
+continue working on the iss-53 branch and then pull the iss53 branch back into master laster.
+
+Basic Merging: 
+
+git switch <to-branch-you-want-to-merge-to>
+
+git merge <branch-you-want-to-merge-in>
+
+
+
+Merge Older Branch, Divergent Branch, Do A Merge Commit: 
+
+- go to the branch you want to merge it in with and run:
+
+git merge <branch-name>
+
+git merge iss-53 
+
+"Git does a simple three-way merge, using the two snapshots pointed to by the branch tips and the common ancestor of the two."
+
+Merge Commits' have more than one parent. 
+
+Upon Successful Merge, Delete Branch That Was Merged in
+
+git branch -d <merged-in-branch>
+
+git branch -d iss-53 
+
+
+
+Basic Merge Conflicts: 
+
+- If the same file in differen branches is changed, you'll get a merge-conflict.
+
+To See Unmerged Files (that have merge conflicts or aren't resolved) run
+
+- git status
+
+The open the files with conflicts manually and fix them.
+
+You have to choose between the two options given in the file that are between
+
+<<<<<< HEAD:fileName
+content in main file
+=====
+content in file to be merged in
+>>>>>>>> branch:fileName
+
+or you can
+
+delete <<<<<, =======, and >>>>> and everything within them and replace it with a combination of the to choices of content or something else you want. 
+
+Example: 
+
+delete from here: 
+<<<<<<<< HEAD:file-name
+content
+=========
+content
+>>>>>>>> branch:file-name
+delete to here.
+
+replace with 
+
+new content. 
+
+After Implementing One of the options, choices above, run: 
+
+git add <on-each-file-with-conflict-resolved> 
+
+to mark it as resolved. 
+
+
+Graphical Tool Can Resolve The Merge Conflict Too:
+
+git mergetool
+
+It's a Visual Merge Tool to walk you through the file conflicts. 
+
+git mergetool 
+
+list the tools that are available, just type the tool's name and it will run or just hit enter, return to run the default mergetool.
+
+If merege was successful, type yes (I guess)
+
+run git status again 
+
+to make sure all conflicts are resolved. 
+
+Evertyhing All Conflicts Are Resolved And The Resoved-Conflict-files are staged, 
+you can run 
+
+git commit
+
+the default merge-commit message: 
+
+Merge branch 'branch-name'
+
+You can include information in the defalut merge-commit about how you resolved the merge and explain unobvious changes you made.
 
