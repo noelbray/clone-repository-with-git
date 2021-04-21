@@ -1,0 +1,49 @@
+git branch 
+
+- list all the branches
+
+- asterisk, *, indicates the branch you're on; the branch HEAD is pointing to.
+
+See Last Commit On Each Branch: 
+
+git branch -v
+
+See Merged or Unmerged branches:
+
+git branch --merged
+
+- merged branches are generally okay to delete
+
+- delete with: 
+
+git branch -d <branch-name>
+
+git branch --no-merged
+
+- unmerged are usually not okay to delete
+
+- git will not delete an unmerged branch
+
+Delete Unmerged, no-merged, Branch: 
+
+git branch -D <branch-name>
+
+Find Out Merge State Of Another Branch Than You Aren't Currently On: 
+
+git branch --no-merged <branch-name>
+
+Changing Branch Name: 
+
+- Do Not rename branches that are still in use by other collaborators. 
+
+- Do Not rename the master, main, or any similar important, core branch.
+
+change bad-branch-name to better-branch-name and keep its history, commits:
+
+Rename Branch Locally: 
+
+git branch --move bad-branch-name better-branch-name
+
+Push better-branch-name to Remote (Github or some other remote)
+
+
