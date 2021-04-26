@@ -1,0 +1,43 @@
+https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches
+
+Remote Branches: 
+
+Remote References:
+
+- references (pointers) in your remote repositories, including branches, tags, and so on.
+
+Get Full List Of Remote Referencdes Explicitly: 
+
+git ls-remote <remote>
+
+or 
+
+git remote show <remote> 
+
+git remote show <remote>:
+
+seems to be a more readible format. 
+
+Remote-tracking Branches: 
+
+- references to the state of remote branches. 
+
+- unmoveable local references
+
+- git moves them for you during network communication for accurate state representation of remote Repository
+
+- like bookmarks that remind you of where your remote repositories where the last time you connected to them 
+
+- take names from <remote>/<branch>
+
+Upon Cloning, You Can Change The Default Master Branch Name: 
+
+git clone -o <new-name> <repo>
+
+example: 
+
+git clone -o Stable-main <repository-url-location>
+
+
+
+

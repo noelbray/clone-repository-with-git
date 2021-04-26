@@ -1,0 +1,79 @@
+https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows
+
+Some Git Developers Workflows: 
+
+Master Branch Contains:
+
+- All Stable Code
+
+- Code that has been or will be released
+
+Develop or Next Branch:
+
+- Work From 
+
+- Use To Test Stability
+
+- Can Be Unstable At Times, but that's okay because it is the Developing Branch
+
+- When It Gets To A Stable State: It Can Be Merged Into Master
+
+- Used To Pull In:
+
+Topic Branches 
+
+- (short-lived branches for fixing issues, making small improvements, and such) that have been tested to make sure they don't introduce bugs. 
+
+Pointers Are Moved Up The Line Of Commits For the Master, Develop And Topic Branches.
+
+Stable Branches Are Father Down The Line
+
+FGPHMBLB.HRNYH.PHHH.IJCN,AP,A.
+
+Bleeding-edge branches are farther up the history - in the develop or topic branches.
+
+Proposed or Proposed Updates (PU) Branches:
+
+- Used In Some Larger Projects
+
+- Has Integrated Branches That May Not Be Ready To Go Into The Next, Develop or Master Branch.
+
+When A Branch Reaches A More Stable Level, It is Merged Into The Branch Above Them:
+
+From Most Stable to Least Stable Branches: 
+
+Master
+>> Develop, Next
+>>> Topic 
+>>>> Proposed, Proposed Updates (PU)
+
+Multiple Long Running Branches Isn't Necessary, But Helpful Especially With Large or Complex Projects
+
+Topic Branches:
+
+- Are Useful In Projects Of Any Size
+
+- Is A Short-lived Branch
+
+- Created, Used For A Single Particular Feature or Related Work
+
+- It's Okay to create, work on, merge, and delete branches several times a day
+
+- Allows Context-switch quickly and completely since branches, work address a singl topic which makes code review easier
+
+- Changes Here Can Be Kept For Minutes, Days or Months, and merged in when ready, stable. 
+
+- Order created doesn't matter.
+
+Example: 
+
+you could create a branch called issue-91;
+
+then after working on that for a bit, 
+
+you decide to make a branch from issue-91 called issue-91-v2 to try to another approach for handling the same thing, 
+
+and then you stop at anytime and go back to the master branch and then create another branch off of the master for testing a "dumbidea-branch"
+
+Remember: Branches Are Completely Local - Everything is being done in your Git Repository on your computer and Not on the <remote> because there is no communication with the server, remote.
+
