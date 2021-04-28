@@ -1,0 +1,115 @@
+Two Main Ways To Integrate Changes From One Branch Into Another: 
+
+1. merge
+
+- easiest to integrate branches together
+
+- performs 3 way merge between the two lates branch snapshots and the most recent snapshot of the two, and creates a new snapshot(and commmit), the new commit points to the previous-last-commit of the master branch and the last-commit of the other branch, experimental branch or any branch. 
+
+2. rebase
+
+- you can take the last commit of the experimental branch and reapply it on top of the commit that is parrallel to it on the master branch or whatever branch it was branched from. 
+
+- takes all commited changes from one branch and puts them on another branch.
+
+git checkout <branch-name>
+
+git checkout experimental 
+
+or use 
+
+git switch experimental
+
+then 
+
+git rebase master
+
+- you have to on the branch that you want to take over the other branch, 
+
+rebase works by: 
+
+- finding common ancestor of both branches
+
+- getting diff of each branches' commit
+
+- savings branches' commit differences to temp files
+
+- resetting current branch to same commit as the branch you are rebasingn onto,
+
+- applying each change in turn 
+
+Then Do A Fast Forward Merge On master branch
+
+git checktout master 
+
+git merge experimental
+
+Now The Last Commit Of Experimental Branch Becomes The Last Commit Of the Master Branch
+
+Note: 
+
+- no difference in end product of integration for merge and rebase, but rebasing makes a cleaner history.
+
+- log rebased branch has linear, cleaner history
+
+Rebasing Is Done To Make Commits Apply Cleanly On A Remote Branch: 
+
+- a project you want to contribute but don't want to maintain
+
+- when ready to submit your contribution, rebase your work on your origin/master to submit to main project
+
+That way the maintainer doesn't have to do any integration work, just fast-forward or clean applying
+
+Last Snapshot, commit is the same for both merge and rebase, but the history is different.
+
+Using Rebase On A Branch of A Branch of A Branch: 
+
+git rebase --onto <main-branch-name> <branch-off-of-main> <branch-off-of-branch-off-of-main>
+
+- you have to be on the branch that you want to put on another. 
+
+git rebase --onto master serverBranch clientBranch
+
+then 
+
+git checkout master
+git merge clientBranch
+
+Now you want to pull in, rebase, your serverBranch, 
+
+Pull In Branch Without Having To checkout, switch to the branch: 
+
+git rebase <basebranch> <topicbranch-branchedOffOfBaseBranch>
+
+- this checks out, goes to the topic branch (severBranch in this case) and then replays it onto the base branch (master in this case)
+
+Then 
+
+git checkout master
+
+git merge serverBranch
+
+Next:
+
+Remove the branches that were replayed onto master, which in this case are clientBranch and serverBranch: 
+
+git branch -d clientBranch
+git branch -d serverBranch
+
+And now you have a linear history. 
+
+Perils of Rebasing: 
+
+Do Not Rebase Commits That Exist Outside Your REpository and That People May Have Based Work On!
+
+Rebasing Abandons Existing Commits And Creates Similar New Ones That are different.
+
+To Set Rebase As Default: 
+
+git config --global pull.rebase true
+
+- But ONLY DO The Above If You Only Rebase Commits That Have Never Left Your Computer or You Are Pushing commits to a branch that no one else uses, non-public commits, branches.
+
+git pull --rebase can help fix things.
+
+You could rebase local changes, but don't rebase public work
