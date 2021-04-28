@@ -193,5 +193,65 @@ git branch -vv
 - list local branches
 - what each branch is tracking
 - whether your local branch is ahead, behind or both.
+- does not reach out to the servers for new information
 
-ahead: shows how many commits locally that are nto pushed to the server. 
+outputs: 
+
+branch-name, last-commit-sha1, [what-branch-is-being-tracked, ahead-behind-or-both,] last-commit-message
+
+ahead: shows how many commits locally that are not pushed to the server. 
+
+behind: is the number of commits on the server that you haven't merged in yet
+
+If there is no ahead or behind, then that means that the branch is up-to-date
+
+[Nothing within brackets] means the branch is not being tracked
+
+Important: 
+if you want up-to-date "ahead" and "behind" numbers, you have fetch all remotes and run git branch -vv
+
+git fetch --all; git branch -vv
+
+
+Pulling: 
+
+git fetch: 
+
+- fetches all changes on server you don't have
+
+- will not modify your working directory at all
+
+- gets the data and then you merge the data yourself
+
+git pull
+
+- fetches and merges the content
+
+- git fetch then git merge
+
+git pull
+
+- looks up server and branch that is tracking another branch, fetches from server, and tries to merge
+
+Recommeded To Use: 
+
+git fetch 
+
+then 
+
+git merge
+
+since git pull can be confusing
+
+Delete Remote Branch
+
+- after merging a branch to a stable-branch such as the master branch
+
+git push <remote> --delete <branch-name-want-to-delete>
+
+ex: 
+
+git push origin --delete iss53
+
+--delete removes the pointer from the server; but data is still there until garbage collection runs. 
+
