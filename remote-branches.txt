@@ -32,12 +32,166 @@ Remote-tracking Branches:
 
 Upon Cloning, You Can Change The Default Master Branch Name: 
 
-git clone -o <new-name> <repo>
+git clone -o <new-name-instead-of-default-name-master> <repo>
 
 example: 
 
 git clone -o Stable-main <repository-url-location>
 
+To Synchronize Your Work With The Given Remote: 
+
+git fetch <remote-url>
+
+git fetch <remote>: 
+
+- looks up which server "origin" is (ex: git.ourcompany.com)
+
+- fetches data you don't have
+
+- updates you local database on your computer
+
+- moves pointer to its new, more up-to-date position
+
+- your local master, main branch becomes branch off of the newly updated master branch
+
+You Can Add New Remote Reference To The Project Your Working On: 
+
+git remote add <short-name-of-new-remote> <remote-address>
+
+ex: 
+
+git remote teamone git://git.team1.ourcompany.com
+
+Now To Get Everything the teamone development branch has, run: 
+
+git fetch <shortname>
+
+git fetch teamone
+
+at this point git fetches no data but "sets a remote-tracking branch called teamone/master to point to the commit that teamone has as its master branch"
+
+Pushing: 
+
+- You have to have write access to push to remote
+
+- Must explicityly push the branches you want to share. 
+
+Private Branches Are For Work You don't Want To share
+
+To Push To Branch
+
+git push <remote> <branch-short-name>
+
+git push origin serverfix
+
+- git automatically expands the branchname to: 
+refs/heads/short-name:refs/heads/short-name
+
+or you can use: 
+
+git push origin <exact-short-name>:<exact-short-name>
+
+You Can Push Local Branch To A Different Branch With a Different Name:
+
+git push <remote> <branch-short-name>:<different-branch-short-name>
 
 
+Pushing Over HTTPS URL:
 
+- requires username & password
+
+- if you don't want to type the un and pw everytime, Set Up A "Credential Cache":
+
+git config --global creditial.helper cache
+
+A fetch that brings down new remote-tracking branches doesn't have local editable copies of them
+
+- You don't have a new serverfix branch, but and unmodifiable origin/serverfix pointer
+
+- to merge it: 
+
+git merge origin/serverfix
+
+if you want your own serverfix, base it off the remote-tracking branch: 
+
+git checkout -b <branch-short-name> <remote>/<branch-short-name>
+
+git checkout -b serverfix origin/serverfix
+
+- The above will give you your own serverfix branch, local branch of serverfix, that you can work on. 
+
+Tracking Branches: 
+
+Checking out a local branch from remote-tracking branch - creates a "tracking branch"
+
+A Tracked Branch Is Called: 
+
+"upstream branch"
+
+Tracking Branches Are: 
+
+- local branches with direct relationship to a remote branch
+
+If On Tracking Branch, Git Knows Server To Fetch From and Branch To Merge To, just us: 
+
+git pull
+
+Cloning A Repository
+
+- creates "master' branch that tracks origin/master
+
+To Set Up Different Tracking Branches, Track Branches On Other Remotes or That Don't Track The Master Branch:
+
+git checkout -b <branch-name> <remote>/<branch>
+
+git checkout --track <remote>/<branch-short-name>
+
+If Branch You're Trying To Checkout 
+
+- Doesn't Exist 
+
+&
+
+- Exactly Matches A Name On Only One Remote
+
+- Git Creates Tracking Branch For You
+
+Set Up Local Branch With Differnet Name: 
+
+git checkout -b <new-branch-name> <remote>/<target-branch-name>
+
+git checkout -b sf origin/serverfix
+
+sf (local branch) will pull from origin/serverfix
+
+Set Existing Local Branch To A Local Branch You Just Pulled Down, Or Change The "upstream" branch you're tracking, use: 
+
+-u or --set-upstream-to
+
+git branch -u <remote>/<branch-short-name>
+
+ex: 
+
+git branch -u origin/serverfix
+
+or 
+
+If You Are Already On Branch That Is Being Tracked, you can use shortcut: 
+
+git merge @{u} 
+
+or 
+
+git merge @{upstream}
+
+instead of git merge origin/master
+
+To See Tracking Branches: 
+
+git branch -vv
+
+- list local branches
+- what each branch is tracking
+- whether your local branch is ahead, behind or both.
+
+ahead: shows how many commits locally that are nto pushed to the server. 
