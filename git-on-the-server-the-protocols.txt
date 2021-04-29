@@ -1,0 +1,9 @@
+Preferred: Intermediate Repository For Collobariting
+
+Running A Git Server: 
+
+- choose which protocols you want your server to support.
+
+I'm just going to read through this section to get an overview of what it would take because I'm not interested in running my own git server at the moment unless, upon reading this, there is a benefit of doing so. 
+
+For my personal projects: Local Protocol seems like it would work for me. 
