@@ -1,0 +1,39 @@
+On git: developers can be a hub and node, can contribute to and maintain public repository. 
+
+Centralized Workflow:
+
+- single collaboration model
+- centralized Workflow
+- one central hub or repository
+- shared by developers
+
+- if anyone pushes, updates the repository before you, you have "merge" in there changes before pushing your changes up to prevent overwritting another developers changes. 
+
+Git Doesn't Allow Developers, Users To Overwrite each other. 
+
+If you try to push after someone else has pushed to the repository there will be a WARNING: 
+
+- you are trying to push non-fast-forward changes and you must fetch and merge before you can push to the repository.
+
+
+
+Integration-Manager Workflow: 
+
+- each developer has write access to their own public repository and read access to everyone else's 
+
+- canonical repository representing "official" project
+
+- you create your own public clone of the project push your changes to it. 
+
+- then send request to the maintainer of the main project to pull in your changes; he/her can add your repository as a remote, test your changes locally, merge them into their branch, push back to their repository.
+
+- Github common workflow
+
+
+Dictator and Lieutenants Workflow:
+
+- huge projects with hundreds of collaborators, ex: Linux Kernel.
+
+- Intergration Managers, lieutenants.
+
+- all lieutenants have benevolent dictator who pushes from their directory to a reference repository from which all collaborators need to pull. 
