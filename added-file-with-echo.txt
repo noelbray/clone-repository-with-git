@@ -1,0 +1,5 @@
+To add a file with in the Git Bash Command Line, open bash terminal in command line or Visual Studio Code, and type, run:  
+
+echo "content, text to automatically add to file" > "new-file-name-to-add"
+
+I've got to do better. 
