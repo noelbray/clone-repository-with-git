@@ -1,0 +1,133 @@
+Inspect - See Commits You Want To See
+
+Short SHA-1: 
+
+- use at least the 1st 4 characters of the SHA-1, commit hash which must be unique, different from the rest of the commit hashes. 
+
+Branch References:
+
+- to show most-recent commit, the tip of a branch, information of any branch: 
+
+-- git show <branchName>
+
+--- git show experimentaBranch
+
+or 
+
+-- git show <commit-sha-1>
+
+--- git show 982838dke8e8e9w9w8eu98wjmlkj4lj3j2l
+
+-- rev-parse can help you see what's going on.
+
+RefLog Shortnames:
+
+- reflog: "a log of where your HEAD and branch references have been for the last few months."
+
+- branch tip updated - change is recorded in temp. history
+
+- use git reflog
+
+-- "git show HEAD@{#} will not work in PowerShell, you have to escape the {} characters: 
+
+--- git show HEAD`{#`} or git show "HEAD@{#}"
+
+or to mimic the display look of reflog: 
+
+- git log -g <branchName>
+
+-- ex: git log -g main
+
+- reflog only logs your work in your repository. 
+
+- intial clone has empty reflog
+
+Ancestry References: 
+
+- place ^ (caret) at end of reference which git understands it to mean: the parent of that commit.
+
+-- Side Note: I just tried to use: git log --pretty=format: '%h %s' --graph and it didn't work, I was getting an error. I looked up more info about git log on git-scm but I still couldn't find out what I was doing wrong, and then a I closely inspected their example, I noticed there was no space between format: and '%h %s'; this command written correctly --pretty=format:'%h %s' --graph
+
+- 1st run --pretty=format:'%h %s' --graph
+- 2nd run git show HEAD^
+-- if the 2nd command doesn't work use git show "HEAD^" or git show HEAD^^
+
+-- for Merge Commits with more than one parent: 
+
+--- a number after ^# ex: git show HEAD^2 means second parent of the commit you're (I think)
+
+---- 1st parent is the branch you were on, merging to (example: main bringing, merging in topic branch)
+
+---- 2nd parent is the branch that is being merged (ex: topicBranch)
+
+- ~ (tilde) 
+
+-- tilde refers to 1st parent
+
+--- HEAD~ and HEAD^ work the same
+
+--- HEAD~2 means 1st parent of 1st parent (grandparent)
+
+-- tilde "traverses the first parents the number of times you specify HEAD~# (# = number of Times To Traverse)
+
+-- tilde itself can be used to specify the number of times you want git to travers
+
+--- ex: git show HEAD~~~ (will traverse 3 times) 
+
+-- to get the 2nd parent of the previous reference that was a merge commit: git HEAD~3^2 
+
+Commit Ranges:
+
+- Find Out What Work On The Branch Your On That Has Work, A Branch, That Hasn't Been Merged Yet to the Main Branch
+
+- Double Dot (syntax)
+
+-- "resolve a range of commits that are reachable form one commit but aren't reachable from another"
+
+-- to see commits on a <topicBranchName> that haven't been merged into the <mainBranchName>
+
+--- <mainBranchName>..<topicBranchName>
+
+-- see all commits in <mainBranchName> that are not in <topicBranchName>
+
+--- <topicBranchName>..<mainBranchName>
+
+---- shows every commit is in <mainBranchName> that isn't reachable in <topicBranchName> 
+
+---- useful for keeping <topicBranchName> up-to-date with <mainBranchName>
+
+-- See What Your About To Push To Remote: 
+
+-- git log <remote>/<masterBranch>..HEAD
+
+-- git log origin/<main>..HEAD
+
+--- shows commits on current branch that aren't in masterBranch
+
+--- shows commits that will be transfered to the server
+
+--- git log origin/main.. (git will automatically assume HEAD)
+
+-- Multiple Points:
+
+--- specify more than two branches to indicate your revision
+
+--- see commits of several branches that are not in the branch your on
+
+--- us ^ or  --not before any reference to not see that references commits but all the other commits from other topic branches, branches:
+
+---- git log refA..refB
+---- git log ^refA refB
+---- git log refB --not refA
+
+--- want to see refA and refB but not refC:
+
+---- git log refA refB --not refC or git log refA refB ^refC
+
+-- Triple Dot
+
+--- see all commits reachable by either of the two branches but not by both of them: <masterBranchName>...<topicBranchName>
+
+---- to see which side of the range the commit(s) are in: git log --lef-right <masterBranchName>...<topicBranchName>
+
+
