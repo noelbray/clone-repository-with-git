@@ -1,1 +1,5 @@
 Nothing here yet. Just a new file for practicing git add -i.
+
+Stage This Hunk With Patch.
+
+Yep. Yep.
