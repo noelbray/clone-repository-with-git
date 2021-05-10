@@ -23,3 +23,7 @@ or git merge origin/<branchname>
 Great repository names are short and memorable.
 
 Made a change to for practicing git add -i or git add --Interactive
+
+here's another change for the practicing git add --interactive
+
+here's another change
