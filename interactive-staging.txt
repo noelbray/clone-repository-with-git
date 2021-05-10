@@ -1,0 +1,48 @@
+Interactive Staging:
+
+commits: 
+
+- logically separate changesets
+- easy to review by you and other developers
+- partion many changes to files that have been modified into separate change sets (commits)
+
+Staging and Unstaging files: 
+
+- At the "What now>" prompt, enter one of the commands listed when you ran git add -i, in this case use "u" short for update
+
+-- What now> u 
+
+- Now at the "Update>>" prompt, enter the file by its listed, associated number (enter multiple numbers for files and separate each number by a comma - no space required)
+
+-- Update>>1,2
+
+- * beside each number/file means "selected, ready for staging", without input, Update>>, after pressing enter will "stage all files with a * "
+
+-- Update>> (press enter)
+
+- Now the file(s) with * have been updated, staged
+
+- And "What now>" prompt is back
+
+- Use s or status command to see the current status
+
+-- What now> s
+
+- Now you can see the staged and unstaged changes
+
+-- "nothing" under "unstaged pagth" means there is nothing to be staged.
+
+- to "unstage" the updates you "staged," use the revert command:
+
+-- What now> r
+
+- And at the "Revert>>" prompt, enter the file(s) by its associated number:
+
+-- Revert>> 1
+
+- Then 
+
+-- Revert>> [press enter]
+
+-- More info on this: https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning
+
