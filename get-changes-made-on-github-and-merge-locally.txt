@@ -1,0 +1,25 @@
+You must be on the branch that you want the content merged to.
+
+Use
+
+git status
+
+to see if the Github repository's master, main is ahead of your local main, master branch.
+
+If it is, then do:
+
+git fetch
+
+After that, do:
+
+git merge origin/main
+
+or
+
+git merge origin/master
+
+or git merge origin/<branchname>
+
+Great repository names are short and memorable.
+
+Made a change to for practicing git add -i or git add --Interactive
