@@ -1,0 +1,29 @@
+git stash command:
+
+- use this to stash, save unfinished work that you've done on a project. Such as having began creating a function to deal with something and suddenly you have to switch to another branch to fix an issue. 
+
+- you want to get back to the work you've started but without creating a commit. 
+
+- takes the "dirty state of your working directory such as modified tracked files and staged changes and saves it on a stack of unfinished changes that you can reapply at anytime (even on a different branch)"
+
+- git stash save is deprecated
+
+- git stash push (use this)
+
+-- offers option of selected pathspecs
+
+This file is going to be staged, then stashed, and then restored so that I can continue working on learning git. 
+
+0. stage what you want saved, anything not stage will not come back, I found out this the hard way just a moment ago. I lost this list I wrote right here. 
+1. git stash push
+2. create a branch and work on hotfix issue or whatever else that need to be worked on. 
+3. When finished, test fix/branch to make sure it is working
+4. commit the work you've completed on the topic branch
+5. merge your work, topic branch, into the main branch (merge commit)
+6. push work to server
+7. run: git stash list - which will show the different unfinished work you've stashed. 
+8. run: git stash apply "stash{#}" work you want restored. stash{#} must be in quotes because {} are special characters in Microsoft powershell you can also use backticks: stash`{#`} and it should work, anything else will fail and give an error. 
+9. Finsh work
+10. commit, check to make sure your work works, (merge if necessary), and push to server.
+
+
