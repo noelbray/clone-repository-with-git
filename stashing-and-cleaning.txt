@@ -22,8 +22,175 @@ This file is going to be staged, then stashed, and then restored so that I can c
 5. merge your work, topic branch, into the main branch (merge commit)
 6. push work to server
 7. run: git stash list - which will show the different unfinished work you've stashed. 
-8. run: git stash apply "stash{#}" work you want restored. stash{#} must be in quotes because {} are special characters in Microsoft powershell you can also use backticks: stash`{#`} and it should work, anything else will fail and give an error. 
+8. run: git stash apply "stash@{#}" work you want restored. stash{#} must be in quotes because {} are special characters in Microsoft powershell you can also use backticks: stash@`{#`} and it should work, anything else will fail and give an error. 
 9. Finsh work
 10. commit, check to make sure your work works, (merge if necessary), and push to server.
 
+"WIP" may stand for "Work In Progress"
+
+git stash apply --index
+
+- --index option will reapply the staged changes if something was staged but wasn't restaged after running git stash apply "stash@{#}"
+
+git stash drop "stash@{#}"
+
+- remove the stash, and removes it from the stash list. 
+
+git stash pop "stash@{#}"
+
+- applies the stash, restores the unfinished work, where you left off, so that you can continue working on it.
+
+- and immediately drops it from the stack and takes it off the list.
+
+Creative Stashing: 
+
+--keep-index option: 
+
+- git stash --keep-index
+
+- stashes all staged content
+
+- but leaves staged content in the index, working directory.
+
+git stash or git stash push:
+
+- stashed modified and staged tracked file(s)
+
+--include-untracked or -u option:
+
+- will stash untracked files
+
+- will not include explicity "ignored" files. 
+
+git stash --include-untracked -all
+
+- stashes untracked and ignored files
+
+git stash --patch option:
+
+- git will become interactive
+
+- ask which changes, hunks you would like to stash and which you like to keep in your working directory.
+
+Creating a Branch from a Stash: 
+
+- if you stash work on a branch, even it is just one file, and you change the file and then try to apply the stashed work, you'll get a merge conflict and you'll have to try to resolve it. 
+
+- Easier way: 
+
+-- git stash branch <new branchname> 
+
+--- recover stashed work and work on it in a new branch
+
+--- creates a new branch
+
+--- checks out the commit you were on when you stashed your uw (unfinished work)
+
+--- reapplies your work to the new branch
+
+--- drops the stash (if it applies successfully)
+
+Cleaning your Working Directory: 
+
+- git clean
+
+- don't want to stash unfinished work or files in wodir (working directory)
+
+- want to get rid of files, work, or unfinsihed work
+
+- Common Reasons for Cleaning Working Directory: 
+
+-- remove cruft created by merges
+
+-- remove external tools
+
+-- remove build artificats to run a clean build
+
+- git clean
+
+-- Be Careful
+
+-- will remove untracked files
+
+-- often no way to retrieve the files or content
+
+- Safer Cleaner:
+
+-- git stash -all
+
+--- removes everything 
+
+--- and stashes it
+
+- remove all untracked files: 
+
+-- git clear -f -d
+
+--- removes any untracked files and subdirectories that become empty as a result of the untracked file or files being removed. 
+
+--- -f means "force" or "really do this"
+
+- If you don't want to type "-f" all the time you can: 
+
+-- git config --global clean.requireForce "false"
+
+- Do A Dry Run Of git clean: 
+
+-- git clean --dry-run (or -n) option
+
+-- will do a dry run and tells you what would be removed
+
+ex: 
+
+$ git clean -d -n
+Would remove text.o
+Would remove tmp/
+
+- git clean command will only remove untracked file that are not in the .gitignor file or other ignore files
+
+-- any file that matches a pattern in the .gitignore or ignore files will not be removed
+
+-- Remove untracked files and untracked files in .gitignore and ignore files: 
+
+--- git clean -n -d -x
+
+---- -x removes untracked files in any ignore files too
+
+---- -n means do a dry run (show what would be removed)
+
+---- -d means remove whole directories
+
+- Unsure What Git Clean Will Do, Then Do A Git Clean Dry Run (use -n | --dry-run option)
+
+- Once you know what git clean will do, then, if you want, replace -n with -f | --force
+
+GIACOY. MEALOTOYO. MYHAOWI.
+
+YAGG!
+
+- Another Careful Way: 
+
+-- Run clean with -i | --interactive 
+
+--- git clean -x --interactive
+
+ex: 
+
+$ git clean -x -I
+Would remove the following items: 
+    untracked-file.txt untracked-file-listed-in-gitignore.txt
+*** Commands ***
+list of commands by number...
+
+---- step through individual file
+
+---- specify patterns for deletion interactively
+
+- git clean -fd command:
+
+-- will refuse to delete directories that you've copied or cloned from other Git repositories (perhaps as submodules)
+
+-- add another -f option to command to make it delete directories that are copied or cloned from other Git repositories even as submodules:
+
+--- git clean -fd -f
 
