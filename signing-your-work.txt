@@ -1,0 +1,73 @@
+How To Verify Commits Are Comming From A Trusted Source: 
+
+To Sign Anything: Configure GPG:
+
+- gpg --list-keys
+
+-- Generate A Key if none come up:
+
+--- gpg --gen-key
+
+- Make Key Default Key To Sign With:
+
+-- git config --global user.signingkey 032990A92B
+
+--- can be used to sign tags and commits
+
+--- just use the -s option to sign and annotate instead of -a | --annotate
+
+Remafo.
+
+---- git tag -s v1.5 -m "my signed and annotated tag"
+
+---- run: git show <tagname> which will show the GPG signature if it has one. 
+
+Verifying Signed Tags: 
+
+- you must have signer's public key in your keyring for this to work:
+
+-- git tag -v <tag-name> or git tag --verify <tag-name>
+
+- To Sign Commits Directly instead of tags: 
+
+-- use -S | --gpg-sign[=<key-id>] option: 
+
+--- git commit -a -S -m 'Signed Commit'
+
+---- -a means commit all changed files
+
+---- -S means GPG sign commit
+
+---- -m means "write message"
+
+-- To See And Verify Commit Signatures:
+
+--- git log --show-signature -1 (-1 means to show 1 commit)
+
+--- git log --pretty="format:%h %G? %aN %s"
+
+---- %G will show a G next to or on the commit that has a GPG signature and is valid, signed and valid
+
+- git merge --verify-signatures or git pull --verify-signatures commands: 
+
+-- tells git to inspect for a key and reject the merge or pull if there is no trusted GPG signature
+
+- git merge --verify-signatures non-verify
+
+-- shows all valid signatures that've been checked and merges signed and unsigned commits.
+
+- git merge --verify-signatures signed-branch
+
+-- -S option with git merge:
+
+--- will sign the resulting merge commit itself.
+
+---- git merge -S
+
+- Verify Every Commit Signed and Sign the Merge Commit: 
+
+-- git merge --verify-signatures -S signed-branch
+
+
+
+
