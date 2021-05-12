@@ -1,0 +1,104 @@
+Find a called or defined function, or display the history of a method.
+
+Git Grep: 
+
+- grep command: 
+
+-- "search through any committed tree, working directory, or even the index for a string or regular expression."
+
+-- -n | --line-number options:
+
+--- will print out the line number where the match is found.
+
+Grep Looks Through Working Directory By Default
+
+Basic Grep Search: 
+
+- git grep <pattern-string>
+
+-- ex: git grep "function consoleLog"
+
+Show Only Files That Contain The Search String & How Many Matches There were: 
+
+- git grep --count "pattern" or git grep -c <pattern>
+
+-- git grep --count "function consoleLog"
+
+-- git grep -c consoleLog
+
+Show Context Of Search String: 
+
+-- git grep -p <pattern-to-search> 
+
+-- git grep -p "consoleLog" *.c
+
+--- -p | --show-function displays the "enclosing method or function for each matching string," so if that function is being called in another function, method, it will let you know what function or method it is called, invoked in. 
+
+--- *.c 
+
+---- * find any pattern-string that has a .c file extension.
+
+Search For Complex Combinations With --and flag:
+
+- insures multiple matches must occur in the same line of text. 
+
+-- git grep --break --heading \ -n -e 'pattern' --and \( -e 'another-pattern' -e 'a-different-patter'\) <tag-name>
+
+--- their example didn't work because the backslash that is used for escaping the "(" and ")" does not work in powershell
+
+--- I used backticks ` instead of \ to escape the ( and )
+
+---- git grep --break --heading -n -e 'function' --and `( -e 'Log' -e '.log' `) [<tagname-old-version-number-or-newestversion-number>|path]
+
+---- git grep --break --heading -n -e 'console' --and `( -e 'Log' -e '.log' `)
+
+----- the above two commancs work
+
+----- you have to have a space betwen `( and -e 'pattern' and -e 'pattern' `) 
+
+----- `( -e 'pattern' -e 'pattern' `)
+
+git grep Command Advantages Over Normal Searching Commands 'grep' and 'ack':
+
+- git grep is really fast
+
+- search through any tree in Git not just the working directory
+
+Git Log Searching:
+
+- Look "when" a "term-pattern" was introduced
+
+- git log command with -S option can search commits and diffs: 
+
+-- can find specific commits by messages or diff content
+
+-- use the Pickaxe option: -S to show "commits that changed the number of occurrences of that string.
+
+-- git log -S <pattern> option
+
+--- ex: git log -S 'consoleLog'
+
+- use -G with git log command to: 
+
+-- it uses a regular expression to search 
+
+Line Log Search:
+
+- line history search
+
+- git log -L <range:file> | <funcname> in <file-path>
+
+-- git log -L :<pattern>:<file-file-pat>
+
+--- ex: git log -L :consoleLog:find-functions-with-grep.js
+
+When Git Can't Figure Out How to Match A Search For a 'pattern | function-name," use a Regex, Regular Expression:
+
+- git log -L '/regex/', /^}/:<file-path>
+
+-- ex: git log -L '/consoleLog/',/^`}/:find-functions-with-grep.js
+
+-- another ex: git log -L "/consoleLog/,/^}/:find-functions-with-grep.js"
+
+--- concerning the two examples just above, you have to either use a backtick before the } curly bracket or put everything after -L in quotes because the curly bracket, }, is a special character in powershell. 
+
