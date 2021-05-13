@@ -1,0 +1,293 @@
+It's Possible to Revise Your Local Commit History:
+
+- at the last moment, you can decide what files go into which commits right before you commit with the stagging area
+
+- you can stash unfinished work, things that have been staged to work on something else. 
+
+- can rewrite commits
+
+-- can change order of commits
+
+-- change messages
+
+-- modify files in a commit
+
+-- squash commits together
+
+-- split commits
+
+-- remove commits entirely
+
+- You can make your commit history the way you want it to look before sharing it with others. 
+
+Don't Push Until You're Happy With It:
+
+- since your work is local within your clone, you can rewrite history locally
+
+Pushed Work:
+
+- commits should not be modified
+
+- consider all work finalized - unless there's a really good reason to change it
+
+Changing the Last Commit:
+
+- change commit message or
+
+- or add, remove, or modify files that were commited
+
+- Rewrite The Most Recent Commit Message: 
+
+-- git commit --amend
+
+- Change Actual Commit Content:
+
+-- 1st: Make Changes: add, remove or modify file(s)
+
+-- 2nd: Stage What You Want Committed
+
+-- 3rd: run: git commit --amend
+
+-- Be Careful, This Is Similar To Rebase, you will overwrite your last commit
+
+-- Don't Amend Your Last Pushed Commit
+
+- If You Made A Lot Of Changes - Rewrite The Last Commit Message 
+
+- If Changes Are Minor (spelling, adding a file you forgot to stage), Don't Rewrite The Last Commit Message
+
+-- run: git commit --amend --no-edit
+
+--- the commit message editor won't open up and the message will remain the same
+
+Changing Multiple Commit Messages That Are Farther Back In Commit History, The Commit Log
+
+- no modify-history tool
+
+- "rebase tool can rebase a series of commits onto the HEAD the were originall based on"
+
+- Interactive Rebase Tool can help:
+
+-- can stop after each commit you want to modify and change the message, add, remove, modify files and etc. 
+
+-- tell rebase which commit in the history to rebase onto (however far back) But Be Careful
+
+-- ex: Change Last Three Commit Messages or Do ETC.: 
+
+--- git rebase -i HEAD~#^
+
+---- the commits will be listed in opposite order of how log list
+
+---- list commits from oldest (HEAD~#^) to newest
+
+--- git rebase --interactive HEAD`#^ command: 
+
+-- # is the number of commits you want to go back
+
+--- ex: git rebase -i HEAD~3^ 
+
+---- will take you back 3 commits, allow you to edit (add, remove, modify file(s), rewrite commit messages of) the last 3 commits. 
+
+--- Be Careful - Every Commit in range HEAD~3..HEAD with a changed message and all of its descendants will be rewritten.
+
+--- Don't include any commit you've already pushed.
+
+--- Don't Include Any Pushed Comments To Server
+
+---- doing that will confuse other developers
+
+-- Now edit script so that it stops at the commit you want to edit.
+
+--- Change the word "pick" to "edit" to stop at that commit
+
+---- whatever commit that has "pick" changed to "edit" will be editable.
+
+----- you can pick just one, several, or all the commits to 'edit'
+
+----- then save and exit the editor,
+
+------ Git goes back to the commits you want to edit and "follow the instructions"
+
+Reordering Commits:
+
+- git rebase --interactive | -i
+
+- to Remove A File: it seems that you just Delete The Entire Line In The Script:
+
+"pick commit-sha-1-# commit message"
+
+- to Change The Order Of The Commits, just rearrange them, reorder them however you want in the script: 
+
+"pick sha-1 Was 2"
+"pick sha-1 Was 1"
+
+- To Abort, just delete all the commits, commit information that is shown 
+
+-- "pick sha-1 message" delete
+-- "pick sha-1 message" delete
+-- delete etc. 
+
+-- Then Save & Exit The Editor
+
+--- Git rewinds your branch to the parent these commits, applies changes, and stops
+
+Squashing Commits:
+
+- Make A Series of Commits Into 1 Commit
+
+-- git rebase --interactive
+
+--- look at, read the Commands: 
+
+---- s, squash <commit> = ....
+
+- Specify "squash" instead, inplace of "pick" or "edit" or "whatever-command"
+
+- git applies the change and the change directly before it.
+
+- For example, to squash 3 commits into 1: 
+
+-- pick sha# message
+-- squash sha# message
+-- squash sha# message
+
+-- Save and Exit Editor
+
+-- changes apply
+
+-- you're returned to the rebase interactive editor to merge the 3 commits
+
+-- now you have a commit that has the changes of the 3 previos commits
+
+Splitting A Commit: 
+
+- Undoes A Commit
+
+- partially stages 
+
+- makes any number of commits from it
+
+- ex: split "Modify File A, Add File Z, Add Comments"
+
+-- Change "pick" to "edit" for that commit
+
+-- Save & Exit The Editor
+
+-- Then rebase script run and drops you to the command line, console:
+
+--- Reset That Commit: run: 
+
+---- git reet HEAD^
+
+----- which undoes the commit
+
+----- unstages the files, changes that were in that commit
+
+----- leaves modified file unstaged
+
+----- Now Stage What You Want & Make A Commit
+
+----- When your done staging, separating, and commiting, run: 
+
+------ git rebase --continue
+
+----- But Be Careful This Changes The SHA-1 of the three most recent commits in your list
+
+------ make sure no changed commit is there that you've already pushed to the repo
+
+Delete A Commit: 
+
+- git rebase -i
+
+- replace "pick" with "drop"
+
+-- pick # message
+-- drop # message
+
+- Deleting or Altering Commits Cause The Rewriting of All The Commits That Follow It. 
+
+-- Further Back In History = More Recreated Commits
+
+--- This Can Cause Merge Conflicts
+
+Abort Interactive Rebase At Any Point: 
+
+- git rebase --abort
+
+Abort Finished Rebase:
+
+- git reflog 
+
+-- recover an earlier version of your branch. 
+
+The Nuclear Option: filter-branch:
+
+- is a History-rewriting Option
+
+- used to rewrite a larger # of commits in some scriptable way
+
+- ex: changing your email address globably
+
+- ex: remove a file form every commit. 
+
+- filter-branch command: 
+
+-- Shouldn't Use It Unless Your Project Isn't Yet Public & Non Has Any Worked Based On It, The Commit(s) Your About To Rewrite. 
+
+-- Best To Do This In A "Testing Branch" & Then hard-reset your master, main branch after seeing the results of the filter-branch command.
+
+-- Use git-filter-repo instead of git filter-branch 
+
+--- filter-branch has too many problems.
+
+--- git-filter-repo is a Python script
+
+---- learn more: https://github.com/newren/git-filter-repo
+
+Remove a File from Every Commit: 
+
+- accidentally commited a file with a password or that is not necessary or etc. 
+
+-- ex: remove "passwords.txt" from entire history:
+
+--- git filter-branch --tree-filter "rm -f passwords.txt" HEAD
+
+-- --tree-filter option: 
+
+--- runs the command after each checkout of the project and then recommits the results. 
+
+---- in the ex., you remove "password.txt" from every snapshot, commit.
+
+- To Remove All Accidentally Committed Editor Backup Files, run: 
+
+-- git filter-branch --tree-filter "rm -f *~" HEAD
+
+Run filter-branch on All Branches: 
+
+- git filter-branch -all
+
+Making A Subdirectory the New Root: 
+
+- can take trunk, tags, and etc. imported from a source control system into the new project Root
+
+- git filter-branch --subdirectory-filter trunk HEAD
+
+- Whatever is in the trunk subdirectory is now the new project root
+
+- and any commits that did not affect the subdirectory will be automatically removed
+
+Changing Email Addresses Globally:
+
+- forgot to set your email address before starting work
+
+- or you want to change your work email address to your personal email address:
+
+- Use filter-branch
+
+-- But Only Change Your Email Addresses
+
+--- --commit-filter option:
+
+--- git filter-branch --commit-filter 'if [ "GIT_AUTHOR_EMAIL" = "current-email-address@localhost"]' then GIT_AUTHOR_NAME="Your Name"; GIT_AUTHOR_EMAIL="your-new-email@example.com"; git commit-tree "$@"; else git commit-tree "$@"; fi' HEAD
+
+---- changes only your email address
