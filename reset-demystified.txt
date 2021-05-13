@@ -1,0 +1,32 @@
+Reset & Checkout Commands
+
+Git Manages 3 Different Trees(collection of files)
+
+Trees:
+
+1. HEAD: Last, current commit snapshot, next parent
+
+2. Index: proposed next commit snapshot
+
+3. Working Directory: Sandbox
+
+
+The HEAD: 
+
+- current branch reference
+
+- pointer to last commit made
+
+- HEAD will be parent of the next new commit, it's always the parent of the current commit.
+
+- HEAD is a snapshot of "your last commit" on that branch
+
+- git cat-file -p HEAD
+
+-- shows directory listing and SHA-1 checksums for each file in the HEAD snapshot
+
+-- shows where the HEAD is pointing to
+
+
+
+
