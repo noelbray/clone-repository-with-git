@@ -27,6 +27,181 @@ The HEAD:
 
 -- shows where the HEAD is pointing to
 
+- git ls-tree -r HEAD
 
+-- list contents of a given tree object
 
+- cat-file & ls-tree
+
+-- "plumbing" commands 
+
+-- used for lower level things 
+
+-- not used for daily working
+
+The Index:
+
+- index is the proposed next commit
+
+- A.K.A "Staging Area"
+
+- git looks at staging area for what to commit
+
+- git commit converts what's in the staging area into a tree for a new commit
+
+- git ls-files -s
+
+-- shows you what your index currently looks like
+
+- Index Not Technically A Tree Structure
+
+- Index Is Implemented As Flattened Manifest
+
+The Working Directory: 
+
+- A.K.A. Working Tree
+
+- HEAD & INDEX store content efficiently but inconvenietly inside .git folder
+
+- Working Directory/Tree (WD/WT)
+
+-- unpacks them into actual files for editing them.
+
+-- WD is like a Sandbox 
+
+--- where you can try changes, play/work before commiting them to the staging area(index) and then to history
+
+The WorkFlow: 
+
+- record workflow in snapshots of your project 
+
+- as your project improves, grows, changes it takes snapshots of it
+
+- 1st git add <filename>, content in the working directory gets copied onto the staging area, the index
+
+- 2nd git commit, takes the content of the index, staging area, and saves it as a permanent snapshot, creates a commit object which points tothat snapshot, and updates master, main, HEAD to point to that commit
+
+- 3rd, at this point, since all the trees are, look the same, git status wont show anything - no output
+
+- 4th The process is repeated: change/edit it, stage it, commit it.
+
+- Switching Branches Or Cloning follows those steps
+
+-- When you "checkout a branch" or "switch to a branch":
+
+--- 1. HEAD points to new branch ref
+
+--- 2. populates index with snapshot of that commit where it came from
+
+--- 3. copies the contents of the index into your working directory/tree.
+
+The Role of Reset:
+
+- What exactly does reset do when you call it: 
+
+-- It Directly Manipulates the 3 trees (HEAD, Index, Working Tree)
+
+--- step 1: Move HEAD
+
+---- moves what HEAD points to
+
+---- if HEAD is set to master branch, git reset <commit-sha-1-#> will start by making master, main, HEAD point to the <commit-sha-1-#> you inputed. 
+
+---- No matter what form of reset with commit# you use, it will try to move the HEAD, even with the option --soft HEAD~ and stop there
+
+---- git reset commit-# --soft
+
+---- reset undoes the git commits upto the commit you specify
+
+----- When you run git commit, a new commit is created, and HEAD Points to it. 
+
+---- When you reset back to HEAD~, the parent of HEAD, you are moving the branch back to where it was Without Changing The Index or Working Directory
+
+---- Now you can update the Index, staging area, and run git commit again - which will accomplish what "git commit --amend" would have done
+
+--- Step 2: Updating the Index (--mixed)
+
+---- next thing reset will do: Update The Index With Contents Of Whatever Snapshot HEAD Now Points to
+
+---- if "--mixed" is specified, "reset" will stop at this point. 
+
+---- If I'm understanding correctly, "git reset HEAD~" goes back one commit by default. 
+
+---- git reset [--mixed] HEAD~ 
+
+----- undid your last commit 
+
+----- unstages everything
+
+----- went back to before running your last git add and git commit commands
+
+--- Step 3: Updating the Working Directory/Tree(--hard)
+
+---- make the WD look like the Index, Staging Area if you use the --hard option:
+
+----- git reset --hard HEAD~
+
+--- reset undoes your last git add and git commit commands and all the work you did in the working directory
+
+---- reset invocatoin can be undone if --hard is not specified
+
+----- --hard option Makes Reset Command Dangerous
+
+------ --hard option will make git destroy data. 
+
+------ --hard forcibly overwrites files in the "working directory"
+
+---- reflog can help you undue a reset as long as --hard was not specified. 
+
+Recap: 
+
+git reset <options> HEAD~ does: 
+
+1. move the branch HEAD points to and stops here if --soft option is set
+2. make the index, staging area, look like HEAD and stops here unless --hard is set
+3. make the working directory look like the index if --hard was set 
+
+Reset With A Path: 
+
+- reset will skip step 1
+
+- limit the remainder of actions to a specific file or set of files. 
+
+-- HEAD cannot point to two part of one commit and part of another. 
+
+- Index/Staging-area & Working Directory can be partially updated. 
+
+- starts with step 2 and then 3 if --hard is specified
+
+- ex: git reset file.txt
+
+-- Since no commit-#, branch, nor --soft nor --hard was specified, it defaults to "reset --mixed HEAD file.txt"
+
+--- step 1 is skipped, HEAD does not move
+
+--- step 2, makes index, staging area, look like HEAD and stops. 
+
+--- just copies file.txt from HEAD to the Index
+
+--- basically "unstages" the file.txt
+
+--- here git reset, git restore do the opposite of git add
+
+--- That's why git status tells you to us git restore --staged <file-name> to unstage the file if wanted.
+
+Specify A Specific Commit To Pull A Version Of A File From: 
+
+- git reset at-least-part-of-commit-# <file-name>
+
+-- ex: git reset a83b file.txt
+
+-- git reset cN83 -- file.txt
+
+--- the Index will look like the file did at the point of the commit you specified
+
+--- if you do git commit, it will make the HEAD Look Like the file did at that point, the point in which step 2 specified. 
+
+-- you can use  --patch with git add or git reset or git restore to unstage content on a "hunk-by-hunk" basis. 
+
+Squashing: 
 
