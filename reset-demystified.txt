@@ -205,3 +205,50 @@ Specify A Specific Commit To Pull A Version Of A File From:
 
 Squashing: 
 
+- you can use reset to quickly and easily squash several commits into one
+
+- you can run: git reset --soft HEAD~2 
+
+-- moves the HEAD back 2 commits(the most recent commit you want to keep)
+
+- then run: git commit again
+
+Check It Out: 
+
+- reset and checkout manipulate the 3 trees but act differently if given a path or not. 
+
+Without Paths:
+
+- git checkout [branch] is similar to git reset --hard [branch]
+
+-- both update all 3 trees(HEAD, INDEX, Working Directory)
+
+- git reset --hard [branch] 
+
+-- is not working directory safe
+
+- git checkout [branch]
+
+-- is working directory safe. 
+
+-- checkout will checkout checks to see if any files have any changes so that the changes are not lost
+
+-- checkout tries to do a trivial merge in the working directory so all of the files you "haven't" changed will be updated. 
+
+- reset --hard
+
+-- replaces everything, all files, no matter what
+
+- Checkout Updates HEAD, it moves HEAD to another branch
+
+- Reset moves the branch to HEAD
+
+With Paths: 
+
+- git checkout [branch] file-path acts like git reset --hard [branch] file-path
+
+- git checkout [branch] <file-path> is not working directory safe. 
+
+- --path for checkout will allow you to revert file contents "hunk-by-hunk"
+
+- summarized sheet at the end of the page. 
