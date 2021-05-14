@@ -1,0 +1,143 @@
+Before doing a merge that may have conflicts:
+
+- commit to a temp branch or stash work in progress
+
+Start A Merge: 
+
+- git merge <branch-name-of-branch-to-be-merged-into-branch-you-are-on> 
+
+Back Out Of A Merge: 
+
+- git merge --abort
+
+-- should work as long as you don't have unstashed, uncommitted changes in wd. 
+
+To Completely Start Over After Trying To Merge, or Merging:
+
+- git reset --hard HEAD
+
+Merge Conflict Caused By Whitespaces(spaces to tabs, tabs to spaces) then do: 
+
+- -Xignore-space-change option before tyring to merge again
+
+- git merge -Xignore-space-change <branchname>
+
+Manual File Re-merging: 
+
+- dos2unix program
+
+- I'm probably going to have to come back to this chapter. It's a lot to try to understand, but I'm going to read through it and do my best to understand it. 
+
+git checkout command can take --ours and --theirs options
+
+- fast way of choosing one side or the other
+
+Merge Log:
+
+- get the unique commits of each branch involved in the merge that has conflicts:
+
+-- git log --oneline --left-right HEAD...MERGE_HEAD
+
+--- triple dot syntaxt was used. 
+
+- further simplified: 
+
+-- git log --oneline --left-right --merge
+
+--- shows only the commits in either side of the merge that touch a file that's currently conflicted
+
+--- add the -p option will give you just the diffs to the file that ended up in conflict. 
+
+---- these things can help give you the context of what's causing the conflict and help you determine a resolution. 
+
+Combinded Diff Format
+
+- Run "git diff" while in merge conflict state
+
+- after running "git diff" directly after a merge conflict, information in a rather unique dff output format. 
+
+-- the Format for the above is called "Combined Diff"
+
+-- after resolving the conflict with this, run git diff again. 
+
+To See How A Merge Conflict Was Resolved After The Fact: 
+
+- git log ---cc -p -1
+
+or us git show on a merge commit to show that too:
+
+2 Ways of Undoing Merges
+
+1. Fix the references:
+
+- for unwanted local merge commits (on you remote, local repository)
+
+- best to move the branches to point them to where you want
+
+- immediately after merging use:
+
+-- git reset --hard HEAD~
+
+--- which will move the HEAD that points to master that points to the new merge commit Back to the commit before the merge commit
+
+---- git reset --hard HEAD~ goes through 3 steps:
+
+----- 1. Move the branch HEAD points to. In this case, we want to move master, main to where it was before the merge commit
+
+----- 2. Make the Index, Staging Area, look like HEAD
+
+----- 3. Make the Working Directory look like the Index
+
+----- BUT THIS REWRITES HISTORY
+
+------ Remember, if people have commits you're rewriting, avoid reset. But if not, it might not hurt to use it. 
+
+------ this will not work if new commits have been created after a merge commit because moving the refs will git rid of the information on those new commits which is not good. 
+
+2. Reverse the Commit:
+
+- make a new commit which undoes all the changes form an existing one. 
+
+- "revert"
+
+- git revert -m 1 HEAD
+
+-- -m 1 flag indicates which parent is the mainline and should be kept. 
+
+-- it undoes the changes from the merged in branch and keeps the content of the parent 
+
+-- the new commit formed has all the contents before the merge happened but the now-unmerged commits are till in the history and if you try to merge that branch in again, git will think it is already up-to-date.
+
+--- if you had work to that topic branch, git will only bring in changes after the reverted merge. 
+
+---- to get around that, this, 
+
+---- to bring in new changes that were reverted out,
+
+---- create a new merge commit. 
+
+----- git revert ^M
+
+Ours or Theirs Preference:
+
+- Tell git which side to prefer
+
+-- git merge -Xours | git merge -Xtheirs
+
+-- which ever side you specify, git will automatically use it during the merge if there is a conflict
+
+-- for individual file changes, git merge-file --ours
+
+
+
+-- git merge -s ours <branch-name-to-be-merged-in>
+
+--- the "ours" strategy does a fake merge
+
+--- it will just keep the exact code in the current branch and not use the topic branch, merging in branch code. 
+
+--- tricks git into thinking a branched is already merged. 
+
+Subtree Merging:
+
+- two branches that have different histories
