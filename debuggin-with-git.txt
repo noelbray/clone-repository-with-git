@@ -1,0 +1,115 @@
+Git can debug version control and source code projects. 
+
+File Annotation:
+
+- shows you what commit was the last to modify each line of any file. 
+
+- if you see a method that's buggy, annotate the file with git blame:
+
+-- git blame command:
+
+--- determines which commit was responsible for the buggy line of code. 
+
+- git blame -L <line-start>,<line-end> <filename>
+
+-- ex: git blame -L 69,82 MakeFile
+
+-- -L restricts output the annotation to lines 
+
+-- 69,82 means go through 69 to line 82
+
+-- this annotation output will output: 
+
+--- 1st field: partial SHA-1
+--- 2nd field: author name (who modified that line)
+--- 3rd field: authored date (when the line was modifed)
+--- 4th field: line number
+--- 5th field: content of the file
+--- ^ prefix at the beginning of the line, in front of the sha-1 means that the lines "were introduced in the repository's initial commit and haven't changed since. 
+
+Git Doesn't Track File Renames Explicitly
+
+Git records snapshots and tries to figure out the renamed file implicitly after it was renamed. 
+
+Ask Git To Figure Out Code Movement: 
+
+- pass -C to git blame
+
+- git analyzes the file you're annotating and tries to figure out where snippets of code within it originally came from. 
+
+- tells you where the original commit came from even if it is from another file. 
+
+Binary Search 
+
+- use when you don't know where the issue, bug is
+
+- and when there have been many commits since the code was working and had stopped working.
+
+- run: git bisect:
+
+-- does a binary search through the commit history to help identify which commit initiated the issue
+
+- Updated a website, people report bug/issue, issue reproducible by you, now figure out what is going wrong:
+
+-- 1st: git bisect start
+
+--- gets things started
+
+-- 2nd: git bisect bad
+
+--- tells the system that the current commit you're on is broken
+
+-- 3rd: git bisect good <good_commit_tag> | git bisect good <good_commit_sha-1>
+
+--- must tell git when the last good, non-buggy, stable, commit was
+
+--- ex: git bisect good g889o898o822d
+
+-- altogther: 
+
+$ git bisect start
+$ git bisect bad
+$ git bisect good v2.8 or git bisect good g29o83o21d
+
+--- now git will figure out how many commits are between the good and bad commit
+
+--- git Checks Out the Middle Commit, between the good and bad commit. 
+
+--- Run some test on the code at the middle commit to see if the issue, bug is there.
+
+---- if the bug is present, then the bug came in sometime before the middle point. 
+
+----- if bug, enter: git bisect bad 
+
+---- if no bug, then the bug came after the middle commit, point. 
+
+----- if no bug enter: git bisect good (indicates no bug found)
+
+--- then git bisects again: gives you middle commit of the lower or upper range of commits based on whether you indicate bad (buggy) or good
+
+---- run some test to see if bug or no bug
+
+---- repeat the process until git gets enough information to locate the commit with the bug/issue.
+
+--- when git gets enough info, it will give you the SHA-1 of the first bad commit, show some of the bad commit's info, which files were modified
+
+---- then use that to help you figure out where's the bug
+
+--- To finish, run: git bisect reset
+
+---- to reset your HEAD to where you were before you started or you'll end up in a weird state. 
+
+- git bisect can help you check, go through, Hundreds of commits quickly to find the bug source commit, buggy commit
+
+Automate git bisect: 
+
+- Create A Script that will exit "0" if the project is good or "non-0" if the project is bad, 
+
+-- once you wrote your script, then:
+
+--- git bisect start HEAD <last-no-bug--stable-commit-tag-or-sha-1>
+--- git bisect run test-error.sh
+
+---- now git will run the test-error.sh script and find the first broken, buggy commit and gives you it and some info on it. 
+
+--- you can also run "make" or "make tests" or some other that runs "automated tests" for you. 

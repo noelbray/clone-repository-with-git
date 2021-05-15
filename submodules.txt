@@ -1,0 +1,149 @@
+When working on one project and you need to use another project within it such a third-party-developed-library or you're developing separatly while using multiple parent projects
+
+But you want to treat the two projects as separate but use one within another:
+
+Submodules: 
+
+- allow you to keep a git repository as a subdirectory of another Git repository. 
+
+- allows you to clone another repository into your project and keep your commits separate.
+
+Starting with Submodules:
+
+Add New Submodule:
+
+- git submodule add <absolute-or-relative-url-of-repository-location-of-project-youWantToStartTracking>
+
+-- ex: git submodule add https://github.com/chaconinc/DbConnector
+
+- By Default, Submodules will add a subproject into a directory named the same as the repository, ex: DbConnector
+
+-- but you can change it by specifying a differen path/location at the end of the command, after the url, separated by a space. 
+
+-- now you can run git status; and you'll see: 
+
+--- .gitmodules 
+--- <project-folder-name/entry> 
+---- ex: DbConnector/SubmoduleFile
+
+--- .gitmodules
+
+---- configuration file that stores mapping between the projects url and the local subdirectory you've pulled into it or several if you have several
+
+---- it's versioned-controlled
+
+---- allows others to know where to get the submodules projects from 
+
+Note: 
+
+- use a url that everyone can have access to. 
+
+- you can overwrite this value locally: 
+
+-- git config submodule.DbConnector.url PRIVATE_URL for your own use. 
+
+- relative urls can be helpful
+
+- you can run git diff --cached project-folder-name/entry
+
+- better output: git diff --cached --submodule <project-folder-name/entry>
+
+The Project-folder-Name/Entry:
+
+- is a subdirectory in your working directory
+
+- git sees it as a "submodule"
+
+-- and doesn't track it if you're not in that directory. 
+
+- git sees it as a commit from that repository
+
+16000 speciall code means recording a commit as a directory entry rather than a subdirectory or a file. 
+
+- then git push origin master
+
+After Cloning A Repository With Submodules you Must run two commands: 
+
+- 1. git submodule init (initialize local configuration)
+
+- 2. git submodule update (fetch all the data from that project and check out the appropriate commit listed in your super project)
+
+Simple Way To Clone Repository With Submodules: 
+
+- git clone --recurse-submodules <repo-url-at-github-etc.>
+
+Already Cloned Repo With Submodules: 
+
+- git submodules update --init or 
+
+- git submodule update --init --recursive
+
+To Check New Work In Submodule: 
+
+- git fetch <submodule-url>
+- git merge origin/master
+
+- no go back to main project and run git diff --submodule
+
+-- will show submodule update and list the commits that were added.
+
+-- make it automatic for git diff: 
+
+--- git config --global diff.submodule log
+
+* if you commit, "yhou will lock the submodule into having the new code when other people update. 
+
+Git Can Fetch And Update Submodules For You:
+
+- git submodule update --remote <submodule-name/entry>
+
+Track Stable Submodule Branch: 
+
+- git config -f .gitmodules submodule.<submodule-name/entry>.branch stable
+
+- ex: git config -f .gitmodules submodules.DbConnector.branch stable
+
+- then run git submodule update --remote
+
+- run: git status and beside the <submodule-name> it will say  "new commits" if new commits were added. 
+
+- show short summary of submodule changes: 
+
+-- git config status.submodulesummary 1
+
+-- then run git status
+
+- git submodule update --remote 
+
+-- will update all submodules
+
+-- if you have a lot of submodules, pass the submodule-name of just the submodule you want to try to update
+
+-- I guess it would look like this: 
+
+--- git submodule update --remote <submodule-name>
+
+Updated submodules are in a: 
+
+Detached HEAD State: 
+
+- means that ther is no local working branch (like master) tracking changes. 
+
+-- this means that if you commit changes to the submodule, those chages will quite possibly be lost the next timeyou run "git submodule update."
+
+Extra Steps to Track Submodule changes: 
+
+If you commit the main project and push it without pushing the submodule changes, people who check out your changes will not have the submodule changes that are depended on since the submodule changes are only on your local computer. 
+
+- make sure this doesn't happen
+
+- by making git make sure all your submodule have been pushed before pushing the main project. 
+
+-- git push --recurse-submodule=check
+
+-- you have to do this for each submodule 
+
+or use "on-demand" to do it for you
+
+--- git push --recurese-submodules=on-demand
+
