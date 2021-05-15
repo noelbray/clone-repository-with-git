@@ -1,0 +1,38 @@
+Rerere = Reuse Recorded Resolution
+
+- it remembers the way you resolved a "hunk conflict"
+
+-- if it sees a similar conflict, it resolves it automatically
+
+Use Rerere For
+
+- to make sure a long-lived topic branch ultimately merge cleanly, 
+
+-- to keep from having a but of merge commits in you history
+
+Rerere Can Automatically
+
+- attempt occasional merge
+
+- resolve conflicts, 
+
+- then back out of the merge. 
+
+-- this should make the final merge easier
+
+- keep a branch rebased
+
+Rerere Can
+
+- merge many changing "topic branches" together into a testable head 
+
+-- if the test fails, rewinding the merge and redoing them withotu the topic branch that made the fail
+
+Enable rerere functionality:
+
+- git config --global rerere.enabled true
+
+- or create this directory in a specific repository:
+
+-- .git/rr-cache
+
