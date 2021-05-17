@@ -1,0 +1,81 @@
+another way of transferring data over a network(other than HTTP, SSH, etc.)
+
+If you can't connect to the network, server, or shared repository, you can use bundle to get the data, you last commits, to your team-mates.
+
+git bundle command: 
+
+- bundles all data into a single file. 
+
+- will package up everything that "git push" send to the server into a binary file that can be emailed or put on a flash drive and then unbundle into another repository
+
+git bundle create <bundle-filename>.bundle HEAD <branch-name>
+
+git bundle create repo.bundle HEAD master
+
+- in repo.bundle is all the data needed to recreate the repository's master branch
+
+-- in order for someone to make a clone of the bundle/repo, HEAD has to be included
+
+Clone From Binary File, Bundle: 
+
+- git clone rep.bundle repo
+
+- if HEAD references aren't included, you have to use: 
+
+-- -b <branchName-you-want-to-checkout>:
+
+--- git clone repo.bundle repo -b master
+
+Determine The Range of Commits to be Included In The Bundle: 
+
+- bundle everything
+
+- or bundle up the difference - the commits you made locally that the server/person doesn't have 
+
+- Test to see which commits haven't been added to origin/master..master or master ^origin/master
+
+- Run a test to see your last commits: 
+
+-- git log --oneline master ^origin/master
+
+-- this will show all the new commits that haven't been pushed to the server: origin/master
+
+-- if your remote is up-to-date with master, nothing will be shown.
+
+-- Once you know which commits haven't been pushed to the oring/master-main, server, you: 
+
+After getting a list of commits you haven't pushed to the server, 
+you can bundle them up: 
+
+- git bundle create <bundle-name-such-as-commits>.bundle <branch-name> ^<beginning-commit-sha-1-for-the-range> 
+
+- git bundle create commits.bundle main ^p39781
+
+-- now commits.bundle is in your directory
+
+--- it can be sent to over email or by flashdrive, usb drive.
+
+Expecting Bundles: 
+
+- git bundle verfiy ../commits.bundle
+
+-- if the git verfication process doesn't say "okay" at the end, you can't import it. 
+
+- Valid, Verified Bundle's Data can be successfully "fetched"
+
+- See Branches Before Fetching:
+
+-- git bundle list-heads ../commits.bundle
+
+-- verify subcommand also tells you the heads as well. 
+
+--- you want to see what can be pulled in. 
+
+-- git fetch ../commits.bundle master:<branch-name-to-import-to>
+
+-- git fetch ../commits.bundle master: other-master
+
+To see What You've Imported: 
+
+-- git log --oneline --decorate --graph --all
+
