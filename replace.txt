@@ -1,0 +1,98 @@
+git's object databases are unchangeable
+
+but git can pretend to replace objects in its databse with other objects. 
+
+replace command: 
+
+- let's you specify an object in Git & "prentend different object" that can be refered to, replaced anytime
+
+- used for replacing one commit in history with another one 
+
+- no need to rebuild entire history with git filter-branch
+
+- you can graft one history onto another by "replacing the earliest commit in the new line with the latest one."
+
+Setting Up A Historical Branch: 
+
+- create a new repository to store it
+
+- create a branch at that point
+
+- push the branch to the new repository as master, main, or some other name
+
+- 1st: git branch <history-branch-name> <commit-sha-1>
+
+- ex: git branch history 83d839s
+
+- in there example they target the 4th commit that is under the 5th commit, HEAD
+
+- 2nd: git push project-history history: master
+
+-- now the history is published.
+
+- 3rd: Truncate Recent History Down, Make Smaller
+
+- 4th: "Create A Base Commit, Initial Commit that Has Instructions On How To Expand The History"
+
+- 5th: rebase the remaining commits (two top commits, 4 and 5 in their ex.)
+
+6th: Choose A Split Point (their's is the 3rd commit).
+
+7th: the base commit will be based on the tree at the Split (I think??)
+
+- "commit-tree" takes a tree and makes a brand new, parentless commit object
+
+- echo 'Get history from blah blah blah' | git commit-tree <partial-sha-1-of-split-commit-point>^{tree}
+
+- ex: git commit-tree 9c68fdc^{tree}
+
+-- Aside: commit-tree command is a "plumbing command" generally used by other git commands to do smaller jobs. - not meant for daily use.
+
+- base commit finished
+
+8th: Rebase Rest Of History On Top Of That with "git rebase --onto"
+
+- --onto argument is the sha-1 from the commit-tree above
+
+- rebase point will the the parent of the first commit you want to keep, they chose the 3rd commit.
+
+-- git rebase --onto <base-instructions-commit> <commit-where-the-split-is-at>
+
+9th: Push the new history to a new project and when people clone it, they's only see the two commits and then a base commit with instructions
+
+_________________________
+
+Someone Clones The project above the line:
+
+Get History Data of Cloned Truncated Repository:
+
+- add a second remote for the historical repository if you want it. 
+
+1. git clone <remote-url>
+
+2. git log --oneline master command will show: 
+
+sha-1 5th commit
+sha1 4th commit
+sha1 (instructions, split, base, commit Get history blah blah blah)
+
+3. git remote add project-history <remote-url-for-history-branch-on-separate-repository>
+
+4. git fetch project-history
+
+The Collaborator would have their recent commits in the master branch and the historical commits in the "project-hisotry/master" branch
+
+5. git log --oneline master
+
+6. git log --oneline project-history/master
+
+To Combine Them Truncated Version and The History Version of the project: 
+
+7. git replace <commit-to-be-replaced> <commit-that-replaces-the-other-commit>
+
+- git replace 8223i32d a82d9235d
+
+- they replace the 4th master branch commit withthe 4th commit of the project-history/master branch.
+
+git log --oneline master
+will now contain the full version of the project, the latest commits and history (that was saved in antother branch in another repository)
