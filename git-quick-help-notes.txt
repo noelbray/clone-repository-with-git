@@ -1,0 +1,7 @@
+git <command> [<options>]
+
+| means or
+
+- ex: ( pop | apply ) or [push [-p | --patch]]
+
+[command [<options>]]

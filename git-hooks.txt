@@ -1,0 +1,111 @@
+Git can run scripts when a specified action occurs.
+
+Two Groups of Hooks: 
+
+- 1. client-spide
+
+- 2. server-side
+
+Client-side Hooks Are Triggered By: 
+
+- committing
+
+- merging
+
+- so on. 
+
+Server-side Hoooks Are Triggered By: 
+
+- receiving pushed commits
+
+Hooks Are Installed In the Hooks subdirectory:
+
+.git/hooks
+
+Client-Side Hooks: 
+
+- 1. Committing Workflow Hooks: 
+
+-- 1. pre-commit:
+
+--- check for code style, run lint, check for trailing whitespace, check docs on new methods
+
+-- 2. prepare-commit-msg
+
+--- it's good for commits where the default message is auto-generated, such as templated commit messages, merge comits, squashed commits, and amended commits. 
+
+--- use it in conjunction with a commit template to programmatically insert information
+
+-- 3. commit-msg
+
+--- if the script exists non-zero, git aborts the commit process
+
+--- can be used to validate a projects state or commit message before allowing a commit to go through
+
+--- use to check if a commit message is conforms to a required pattern
+
+-- 4. post-commit
+
+--- used for notification or something similar
+
+2. Email Workflow Hooks:
+
+- 3 client-side hooks for an email-based workflow
+
+- all are invoked by "git am" command
+
+- read this if you're taking patches over email. 
+
+3. Other Client Hooks: 
+
+- 1. pre-rebase
+
+--- use this hook to disallow rebasing any commits that have already been pushed. 
+
+- 2. post-rewrite
+
+--- run by commands that replace commits, such as git commit --amend
+
+--- similar usage to post-checkout and post-merge hooks
+
+- 3. post-checkout
+
+--- can be used to set up your working directory properly for your project environment. 
+
+- 4. post-merge
+
+--- used to restore data in the working tree that Git can't track, such as permissions data. 
+
+Side note: stdin means standard input
+
+- 5. pre-push
+
+--- use to validate a set of re updates before a push occurs 
+
+Garbage Collection:
+
+- git gc --auto
+
+6. pre-auto-gc
+
+--- can be used to notify you that garbage collection is happening or to abort the collection if running gc right now isn't a good time. 
+
+Server-Side Hooks: 
+
+- must be system administrator to enforce nearly any kind of policy for your project
+
+1. pre-receive
+
+--- use to do things like make sure none of the updated references are non-fast-forwards, to do access control for all the refs and files they're modifying with the push. 
+
+2. update script
+
+--- similar to pre-receive script
+
+3. post-receive
+
+--- can be used to update other services or notify users. 
+
+Tip: 
+
+When writing a script/hook that others will need to read, use the long versions of the command-line flags.

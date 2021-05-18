@@ -1,0 +1,5 @@
+Access Control List (ACL)
+
+- specifies which users are allowed to push changes to which parts of your projects. 
+
+- write hooks in the "acl" file to enforce permissions

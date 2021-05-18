@@ -1,0 +1,35 @@
+git config --global user.name "John Doe"
+
+git config --global user.email johndoe@example.com
+
+- configuration files are for non-default behavior
+
+For Non-default behavior, git looks at:
+
+1st: System-wide defaults:
+
+- [path]/etc/gitconfig 
+
+- general settings for all users
+
+- git confi --system 
+
+-- --sytem read and writes this file
+
+2nd: ~/.gitconfig or ~/.config/git/config file
+
+- read and write to this file, config with "--global" option
+
+3rd, it will look at, ".git/config" of the current repository you're on
+
+- --local option to git config
+
+- this is the default file that is used for creating and storing defaults in if you don't specify where you want your default(s) stored. 
+
+system < global < local:
+
+Two Cateogories of Configuration: 
+
+1. client-side
+
+2. server-side

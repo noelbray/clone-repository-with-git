@@ -1,0 +1,12 @@
+Git Attributes: 
+
+- path specific settings
+
+Attributes Are Set In: 
+
+- .gitattributes
+
+- .gt/info/attributes
+
+- read through parts and skimmed parts. 
+
