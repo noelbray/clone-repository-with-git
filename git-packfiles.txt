@@ -1,0 +1,43 @@
+repo.rb blob object
+
+to get the size of an object:
+
+- git cat-file -s <commit-sha-1-you-want-info-on>
+
+Loose object: 
+
+- the initial format in which Git saves objects
+
+Packfile: 
+
+- git packs up several "loose" objects into a single binary file
+
+- saves space
+
+- more efficient
+
+- git makes packfiles when there are too many "loose" objects 
+
+- Dangling:
+
+-- blobs that aren't pointed to by any commit
+
+-- are not picked up by a new packfile that is created with: 
+
+--- git gc
+
+- a packfile 
+
+-- is a single file that contains the contents of all the objects that were removed from your filesystem.
+
+- a packfile index
+
+-- is a file that contains offsets into that packfile so you can quickly seek to a specific object. 
+
+- git verify-pack <file-url-with-sha-1> 
+
+-- plumming-command allows you to see what was packed up, in the packfile
+
+Git will automatically repack, create packfiles, here and there.
+
+You can manually repack, create packfiles, at any time by running "git gc" by hand.

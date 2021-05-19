@@ -1,0 +1,20 @@
+Git is a content-addressable filesystem.
+
+- git is a simple key-value data store
+
+-- reminds me of the object in Javascript which contains key:value pairs
+
+- any kind of content can be inserted in git
+
+- git gives you the key which you use to retrieve the content, value
+
+3 Main Git Objects: 
+
+- the blog
+- the tree
+- the commit the blob
+
+-- they are stored as separate files in your .git/objects directory
+
+- blob object can be almost anything, string, binary large object, etc. 
+

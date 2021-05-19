@@ -1,0 +1,41 @@
+2 Ways to Transfer Data:
+
+- 1. "dumb" protocol
+
+- 2. "smart" protocol
+
+Dumb Protocol:
+
+- for repositories that are "read-only" over HTTP
+
+- requires no git-specific code on the server side during the transport process. 
+
+- the fetch process: 
+
+-- HTTP GET request
+
+-- client can asusme layout of the git repo on the server
+
+- it's rarely used, it's difficult to secure or make private
+
+Smart Protocol:
+
+- simple but inefficient
+
+- can't handle writing of data from client to the server. 
+
+- more common for transferring data
+
+- requiresa process on the remote end that is intelligent about Git 
+
+-- has to be able to read local data
+
+-- figure out what the client has and needs,
+
+-- be able to generate a custom packfile for it.
+
+- 2 Data Transferring Processes: 
+
+-- A Pair for Uploading Data
+
+-- A Pair for Downloading Data

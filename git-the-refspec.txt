@@ -1,0 +1,80 @@
+[remote "origin"] (name of the remote origin)
+    url = https://github.com/yourname/repositoryname (url of the remote repository)
+    fetch = +refs/heads/*:refs/remotes/origin/* (refspec)
+
+refspec format:
+
+- 1st: optional +
+
+-- + tells git to update the reference even if it isn't a fast-forward
+
+- 2nd: <src>:<dst>
+
+-- src is the pattern for references on the remote side
+
+-- dst is where those references will be tracked locally.
+
+You can access the log of the master, main branch locally:
+
+- git log origin/master
+
+- git log remotes/origin/master
+
+- git log refs/remotes/origin/master
+
+Pull Down Just The Master, Main Branch From The Server
+
+- change the refspec:
+
+-- fetch = +refs/heads/master:refs/remotes/origin/master
+
+Pull Master Branch On Remote Down to origin/master:
+
+- git fetch origin master:refs/remotes/origin/mymaster
+
+Specify Multiple refspecs:
+
+- git fetch origin master:refs/remotres/origin/mymaster \ topic:refs/remotes/origin/topic
+
+- + can overide a rejection caused by it not being listed as a fast-forward reference. 
+
+- You Can Specify Multiple Refspecs for fetching in your configuration file
+
+- partial globs can be used
+
+Namespaces (directories), namespace references:
+
+- have more structure and do the same as refspec
+
+Pushing Refspecs:
+
+- git push origin master:refs/heads/qa/master
+
+- push refspec can be added to the config file to enable them to be automatically pushed:
+
+[remote "origin"]
+    url = https://github.com/yourname/simplegit-progit
+    fetch = +refs/heads/*:refs/remotes/origin/*
+    push = refs/heads/master:refs/heads/qa/master
+
+- running "git push origin" will push the local master branch to the remote qa/master branch by default. 
+
+- Refspec canNot fetch from onen repo and push to another one
+
+Deleting References: 
+
+- use refspec to delete references from the remote server by running:
+
+- git push <remote-server-url> <src>:<dst>
+
+- ex: git push origin :topic
+
+-- since there is <nothing-here>:topic
+
+--- it makes the topic branch on the remote nothing, effectively deleting it. 
+
+- Newer Delete Syntax:
+
+-- git push <remote-server-url-or-shortname> --delete <branch-name>
+
+-- ex: git push origin --delete topic

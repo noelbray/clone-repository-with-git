@@ -1,0 +1,82 @@
+References:
+
+- storing a sha-1 under a simple name
+
+- simple names are called references or refs in git.
+
+git update-ref: 
+
+- used to update a reference, shortname
+
+A Branch: 
+
+- is a simple pointer or reference to the head of a line of work. 
+
+- will contain only work from the commit the branch is created at all the way down to the initial commit and then any new commits you had to the branch
+
+The HEAD: 
+
+- git knows the sha-1 of the last, most-recent, commit by the HEAD reference
+
+- HEAD is a symbolic reference that contains a pointer to another reference
+
+- Though rare, HEAD may contain the SHA-1 value of a git object such as when you checkout a tag, commit, or remote branch, which puts your repository in "detached HEAD" state. 
+
+git commit: 
+
+- creates a commit object that specifies the parent of that commit object to be whatever SHA-1 value the reference in HEAD points to. 
+
+git symbolic-ref
+
+Tags: The 4th Main Git Object
+
+- similar to a commit object
+
+-- contains a tagger, a date, a message, and a pointer. 
+
+- But the tag generally points t a commit rather than a tree, similar to a branch reference
+
+-- but it never moves, but always points to the same commit. 
+
+- Lightweight Tag: 
+
+-- git update-ref refs/tags/<tag-name> <commit-sha-1-you-want-to-tag>
+
+-- a refence that never moves. 
+
+- Annotated Tag:
+
+-- upon creation, git creates a tag object and then writes a refence to point to it rather than directly to the commit. 
+
+-- use -a | --annotate option to create an annotated tag
+
+-- git tag -a <tag-name> <commit-sha-1-you-want-to-annotate-tag> -m "annotate tag message goes here"
+
+- Any Git Object Can Be Tagged
+
+Remotes: 
+
+- 3rd type of reference
+
+- for each branch, git stores the last value of what the url, address to the server was used to push to the server in the refs/remotes directory
+
+- ex: remote origin:
+
+-- git remote add origin git@github.com:schacon/simplegit-progit.git
+
+-- git push origin master
+
+See what the master branch on the origin remote was the last time you communicated with the server:
+
+- cat .git/refs/remotes/origin/master
+
+- remote refs differ from branches (refs/heads references) mainly in that they're considered read-only. 
+
+- you can checkout one
+
+- git won't symbolically reference HEAD to one
+
+- you'll never update it with a commit command
+
+- they're like bookmarks of the last known state of the server. 
+

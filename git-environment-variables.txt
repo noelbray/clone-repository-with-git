@@ -1,0 +1,5 @@
+Git runs inside a "bash" shell.
+
+Use a number of shell environment variables to determine how to behave. 
+
+You can make Git behave the way you want to.
