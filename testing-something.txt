@@ -1,0 +1,13 @@
+This file was created on 2021-05-20.
+
+Here's a modification.
+
+Here are some more changes.
+
+Another new line with a whitespace at the end of it. 
+
+You can't edit in read only editor in Visual Studio Code, but you can edit the (Working Tree) where modifications have taken place or are taking place. The (Working Tree) is displayed on the right side of Visual Studio Code's Editor while the unmodified, last commited version of the file is on the left side of the Visual Studio Code Editor.
+
+git diff --check shows the lines of code that have whitespace issues such as this line of text/code. 
+
+Include all changes for all tracked files that are and are not in the staging area by using "git commit -a"
