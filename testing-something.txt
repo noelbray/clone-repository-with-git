@@ -11,3 +11,25 @@ You can't edit in read only editor in Visual Studio Code, but you can edit the (
 git diff --check shows the lines of code that have whitespace issues such as this line of text/code. 
 
 Include all changes for all tracked files that are and are not in the staging area by using "git commit -a"
+
+-------------------------------------
+
+I just learned something about --pretty=format that I can't believe I didn't realize when I tried it the first time. 
+
+--pretty=format"can tell the difference between regular text and the specifiers which are denoted by a % sign in front or one of more letters. E.g.: %h"
+
+E.g.: git log --pretty=format:"Author: %an -- Subject: %s -- Abbreviated Commit SHA-1: %h"
+
+-----------------------------
+
+Remove An Alias: 
+
+To remove an alias created like so: git config --global alias.<aliasName> <command>
+
+Remove, Unset Alias: 
+
+git config --global --unset alias.<aliasName>
+
+src = https://stackoverflow.com/questions/23512402/how-can-i-delete-a-git-alias
+
+-----------------------------
