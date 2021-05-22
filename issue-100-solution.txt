@@ -1,1 +1,5 @@
 Let's fix issue-100.
+
+let functionExpression = passMeSomething => {
+    console.log(passMeSomething);
+}; // This is for Commit 2 on issue-100 branch
