@@ -9,3 +9,12 @@ function declarationAlert() {
 }
 
 declarationAlert(); // Invoke the function.
+
+let answer = "yes";
+
+if (answer === "yes") {
+    alert("The answer is yes. Yabba Dabba Dooo!!!!");
+}
+else {
+    alert("The answer was no. What a bummer, but I'm not surprised.");
+}
