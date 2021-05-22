@@ -3,3 +3,9 @@ Let's fix issue-100.
 let functionExpression = passMeSomething => {
     console.log(passMeSomething);
 }; // This is for Commit 2 on issue-100 branch
+
+function declarationAlert() {
+    alert("This alert message was brougth to you by the function called declarationAlert. Which was invoked in the fall below it.");
+}
+
+declarationAlert(); // Invoke the function.
