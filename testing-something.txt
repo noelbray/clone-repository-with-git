@@ -45,3 +45,5 @@ The the file has been amended, so go ahead and merge the new-file-work branch in
 P.S.
 
 I created an alias called ss for the command "status -s". Oh yeah.
+
+This will be in the commit directly after the merge commit I made when I merged the new-file-work branch into the main branch not to long after merging in the hotfix branch, both of which I have deleted because they are no longer needed. :)
