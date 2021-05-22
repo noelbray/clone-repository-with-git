@@ -47,3 +47,5 @@ P.S.
 I created an alias called ss for the command "status -s". Oh yeah.
 
 This will be in the commit directly after the merge commit I made when I merged the new-file-work branch into the main branch not to long after merging in the hotfix branch, both of which I have deleted because they are no longer needed. :)
+
+I just created a branch called dumbidea and created a file in it called the-dumbidea.txt. I'm writing this line of code so that the main branch will be ahead of the dumbidea branch.
