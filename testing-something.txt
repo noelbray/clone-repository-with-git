@@ -33,3 +33,15 @@ git config --global --unset alias.<aliasName>
 src = https://stackoverflow.com/questions/23512402/how-can-i-delete-a-git-alias
 
 -----------------------------
+
+I'm rereading the primary, 1st chapters, of the Pro Git Book, and now I'm practicing Branching and Merging again in 3.2 of it. 
+
+Noel: you can learn git and keep getting better with git. Remember it.
+
+TYGGFATIIGAWD.
+
+The the file has been amended, so go ahead and merge the new-file-work branch into main.
+
+P.S.
+
+I created an alias called ss for the command "status -s". Oh yeah.
