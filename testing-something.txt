@@ -51,3 +51,17 @@ This will be in the commit directly after the merge commit I made when I merged 
 I just created a branch called dumbidea and created a file in it called the-dumbidea.txt. I'm writing this line of code so that the main branch will be ahead of the dumbidea branch.
 
 I created a branch called issue-100 and then I created a branch off of the issue-100 branch called issue-100-v2 so that I could practicing created a branch from a branch from the main branch. I'm going to delete the issue-100 branch and then merge in the issue-100-v2.txt to see what happens after reading about this in 3.4 Branching Workflow. The said you could through away the initial iss91 branch and keep, merge iss91v2. I think they meant by throw away, that that means the branch could be deleted and then the iss91v2 could be merged in without a problem as well as the dumbidea branch so I am testing my theory out. I hope it works.
+
+Based on what ch.3-s.4 of the Pro Git book said about throwing away the issu91 branch and merging the iss91v2 branch...
+
+I tried to delete my issue-100 branch with "git branch -d issue-100" and git rejected the command because I had unmerged commits in it, so I had to "git branch -D issue-100" to force delete the branch.
+
+Then I chekced the "issue-100-v2" branch to see if everything was still there and it was.
+
+After that I merged the "issue-100-v2" branch into my "main" branch.
+
+I ran "git log" and skimmed through it and it seem like everything was okay.
+
+Next I merged "dumbidea" and the merge appears to be successful too. 
+
+TYGLLGA.
