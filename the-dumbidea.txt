@@ -1,0 +1,11 @@
+I thought this was a dumb idea, but my team mates think it is a great idea, so we're going to use it.
+
+function greatIdea() {
+    console.log("This is a great idea.")
+}
+
+greatIdea();
+
+I'm just having some fun.
+
+This dumbidea originally was created on the dumbidea branch.
