@@ -1,0 +1,10 @@
+/node_modules
+private-file.txt
+permanently-remove-and-unstage-untrack-a-file.txt
+remove-file-from-stage-but-keep-on-hard-drive.txt
+thank-you-Yahweh.txt
+this-file-was-added-in-testingBranch1-branch.txt
+to-undelete-restore-a-file-you-deleted.txt
+# this-will-stay-as-modified-as-long-as-it-remains-M-unstaged.txt
+# This line is like a comment and will not be read. 
+# about gitignore files in Pro Git Book: https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
